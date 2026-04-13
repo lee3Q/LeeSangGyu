@@ -175,6 +175,30 @@ footer .heartbeat{display:inline-block;animation:heartbeat 1.5s infinite;color:v
   .discovery-badge{bottom:12px;right:12px;padding:8px 14px;font-size:0.65rem}
 }
 
+/* ===== MEETING BANNER ===== */
+.meeting-banner{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:9995;width:calc(100% - 32px);max-width:460px}
+.meeting-card{background:var(--card);border:1px solid var(--accent);border-radius:14px;overflow:hidden;box-shadow:0 0 30px rgba(0,255,159,0.1)}
+.meeting-header{padding:14px 20px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:background 0.2s}
+.meeting-header:hover{background:rgba(0,255,159,0.05)}
+.meeting-emoji{font-size:1.1rem}
+.meeting-title{font-size:0.9rem;font-weight:700;color:var(--accent);flex:1}
+.meeting-arrow{color:var(--dim);font-size:0.7rem;transition:transform 0.3s}
+.meeting-banner.open .meeting-arrow{transform:rotate(180deg)}
+.meeting-content{max-height:0;overflow:hidden;transition:max-height 0.5s cubic-bezier(0.16,1,0.3,1)}
+.meeting-banner.open .meeting-content{max-height:600px}
+.meeting-inner{padding:0 20px 20px}
+.meeting-section{margin-bottom:16px}
+.meeting-section h4{font-size:0.8rem;color:var(--accent);margin-bottom:6px;font-family:var(--mono);letter-spacing:0.05em}
+.meeting-section p{font-size:0.85rem;color:var(--dim);line-height:1.6}
+.meeting-section ul{list-style:none;padding:0}
+.meeting-section li{font-size:0.85rem;color:var(--dim);line-height:1.6;padding:2px 0}
+.meeting-section li::before{content:'›';color:var(--accent);margin-right:8px}
+.meeting-links{margin-top:16px;text-align:center}
+.meeting-links a{color:var(--accent);text-decoration:none;font-family:var(--mono);font-size:0.8rem;border:1px solid rgba(0,255,159,0.3);padding:8px 20px;border-radius:8px;display:inline-block;transition:background 0.2s}
+.meeting-links a:hover{background:rgba(0,255,159,0.08)}
+.meeting-close{display:block;width:100%;margin-top:12px;padding:10px;background:none;border:1px solid var(--border);color:var(--dim);border-radius:8px;cursor:pointer;font-size:0.8rem;font-family:var(--sans);transition:all 0.2s}
+.meeting-close:hover{border-color:var(--accent2);color:var(--accent2)}
+
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
   .glitch::before,.glitch::after{display:none}
@@ -185,6 +209,59 @@ footer .heartbeat{display:inline-block;animation:heartbeat 1.5s infinite;color:v
 
 <canvas id="bg"></canvas>
 <div class="cursor-glow" id="glow"></div>
+
+<!-- ===== MEETING BANNER ===== -->
+<div class="meeting-banner" id="meetingBanner">
+  <div class="meeting-card">
+    <div class="meeting-header" id="meetingHeader">
+      <span class="meeting-emoji">&#128203;</span>
+      <span class="meeting-title">송명기 대표님 안녕하세요</span>
+      <span class="meeting-arrow">&#9660;</span>
+    </div>
+    <div class="meeting-content">
+      <div class="meeting-inner">
+        <div class="meeting-section">
+          <h4>30초 소개</h4>
+          <p>한성대 기업경영트랙 3학년 이상규. AI를 도구로 써서 사람을 이해하는 제품을 만들고 있습니다.</p>
+        </div>
+        <div class="meeting-section">
+          <h4>관통 주제</h4>
+          <p>"이 사람이 어떤 사람인지 구조화해서, 그걸로 더 나은 경험을 주는 것"</p>
+        </div>
+        <div class="meeting-section">
+          <h4>만든 것들</h4>
+          <ul>
+            <li><strong>풀림</strong> — AI 코칭 앱. 사업계획서 v6, 아산 두어스 지원 중</li>
+            <li><strong>인간30</strong> — 30인 행동 시뮬레이터. 4층 데이터 모델</li>
+            <li><strong>AI 개인화 심리테스트</strong> — 184문항 → AI 행동지침</li>
+            <li><strong>카톡 분석기</strong> — 대화 패턴 분석 MVP</li>
+          </ul>
+        </div>
+        <div class="meeting-section">
+          <h4>이야기하고 싶은 것</h4>
+          <ul>
+            <li>현직 창업자 시각에서 피드백</li>
+            <li>"이 중에 뭐가 사업이 되느냐" 관점</li>
+            <li>창업 과정에서의 현실적 조언</li>
+            <li>연결될 수 있는 사람/기회</li>
+          </ul>
+        </div>
+        <div class="meeting-section">
+          <h4>질문</h4>
+          <ul>
+            <li>창업하시면서 가장 예상 못 했던 게 뭐였어요?</li>
+            <li>초기에 고객 반응 어떻게 확인하셨어요?</li>
+            <li>지금 다시 시작한다면 뭘 다르게 하실 건가요?</li>
+          </ul>
+        </div>
+        <div class="meeting-links">
+          <a href="https://lee3q.github.io/psych-test/" target="_blank">심리테스트 보기 →</a>
+        </div>
+        <button class="meeting-close" id="meetingClose">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ===== HERO ===== -->
 <section id="hero">
@@ -885,6 +962,13 @@ setInterval(() => { if (Math.random() > 0.7) glitchBurst(); }, 5000);
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') modal.classList.remove('active');
 });
+
+// ===== Meeting Banner =====
+const meetingBanner = document.getElementById('meetingBanner');
+const meetingHeader = document.getElementById('meetingHeader');
+const meetingClose = document.getElementById('meetingClose');
+meetingHeader.addEventListener('click', () => meetingBanner.classList.toggle('open'));
+meetingClose.addEventListener('click', () => meetingBanner.style.display = 'none');
 </script>
 </body>
 </html>
