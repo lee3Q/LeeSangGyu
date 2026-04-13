@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>이상규 월드</title>
 <meta name="description" content="이 사람의 머릿속에 들어온 세계">
+<meta property="og:title" content="이상규 월드">
+<meta property="og:description" content="데이터에서 사람을 읽는다. AI를 도구로 사람을 이해하는 제품을 만든다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lee3q.github.io/LeeSangGyu/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="이상규 월드">
+<meta name="twitter:description" content="데이터에서 사람을 읽는다.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -18,6 +26,12 @@ body.sun{background:#fff;color:#1a1a1a;overflow-y:auto}
 #particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.7;transition:opacity .6s}
 body.sun #particles{opacity:0}
 
+/* Scrollbar */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(0,255,159,.25);border-radius:3px}
+body.sun ::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15)}
+
 /* ===== TOGGLE ===== */
 #toggle{position:fixed;top:16px;right:16px;z-index:1000;width:48px;height:48px;border-radius:50%;
 border:2px solid rgba(255,255,255,.15);background:rgba(0,0,0,.4);backdrop-filter:blur(8px);
@@ -29,7 +43,7 @@ body.sun #toggle{border-color:rgba(0,0,0,.1);background:rgba(255,255,255,.9);col
 /* ===== HINT ===== */
 #hint{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:100;
 font-family:var(--mono);font-size:.7rem;color:var(--dim);letter-spacing:.12em;
-animation:pulse 2.5s infinite;transition:opacity .5s}
+animation:pulse 2.5s infinite;transition:opacity .5s;white-space:nowrap}
 #hint.gone{opacity:0;pointer-events:none}
 @keyframes pulse{0%,100%{opacity:.3}50%{opacity:.7}}
 
@@ -48,9 +62,19 @@ transform:translate(-50%,-50%);animation:brainBob 4s ease-in-out infinite}
 50%{transform:translate(-50%,-50%) translateY(-16px) scale(1.04)}}
 
 /* Generic floating object */
-.obj{position:absolute;cursor:pointer;transition:filter .3s}
+.obj{position:absolute;cursor:pointer;transition:filter .2s}
 .obj:hover{filter:brightness(1.3)!important;z-index:20}
 .obj:active{transform:scale(.9)!important}
+
+/* Tooltips */
+.tip{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);
+font-size:.62rem;font-family:var(--mono);white-space:nowrap;padding:3px 8px;
+border-radius:4px;opacity:0;transition:opacity .25s;pointer-events:none;
+max-width:140px;overflow:hidden;text-overflow:ellipsis;text-align:center}
+.obj:hover .tip{opacity:1}
+.star .tip{background:rgba(255,215,0,.18);color:#ffd700;bottom:calc(100% + 4px)}
+.stone .tip{background:rgba(255,255,255,.07);color:rgba(255,255,255,.6)}
+.leaf .tip{background:rgba(74,138,106,.15);color:#6ab89a}
 
 /* Stones */
 .stone{width:clamp(38px,7.5vw,62px)}
@@ -63,8 +87,6 @@ transform:translate(-50%,-50%);animation:brainBob 4s ease-in-out infinite}
 /* Stars */
 .star{width:clamp(24px,5vw,36px)}
 .star svg{width:100%;animation:twinkle 3s ease-in-out infinite}
-.star:nth-child(2) svg{animation-delay:1s}
-.star:nth-child(3) svg{animation-delay:2s}
 @keyframes twinkle{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.18)}}
 
 /* Float animations */
@@ -90,7 +112,7 @@ font-size:1.4rem;cursor:pointer;line-height:1}
 #mclose:hover{color:var(--accent)}
 body.sun #mclose{color:#999}
 
-/* Modal content styles */
+/* Modal content */
 #mbody h2{font-size:1.2rem;font-weight:700;margin-bottom:16px;color:var(--accent)}
 body.sun #mbody h2{color:#1a1a1a}
 #mbody p{line-height:1.8;margin-bottom:10px;font-size:.92rem}
@@ -103,7 +125,7 @@ body.sun .pcard{background:#f7f7f7;border-color:#e8e8e8}
 body.sun .pcard:hover{border-color:#1a1a1a}
 .pcard h3{font-size:.9rem;font-weight:700;margin-bottom:3px}
 .pcard p{font-size:.78rem;color:var(--dim);margin:0;line-height:1.5}
-.pcard a{font-family:var(--mono);font-size:.72rem;color:var(--accent);text-decoration:none}
+.pcard a{font-family:var(--mono);font-size:.72rem;color:var(--accent);text-decoration:none;display:inline-block;margin-top:4px}
 body.sun .pcard a{color:#0066cc}
 .badge{font-family:var(--mono);font-size:.6rem;padding:2px 7px;border-radius:4px;display:inline-block;margin-top:5px}
 .badge.live{background:rgba(0,255,159,.12);color:var(--accent)}
@@ -119,8 +141,9 @@ body.sun .slist li{border-color:#eee}
 #sun.on{display:block}
 #sun .wrap{max-width:680px;margin:0 auto;padding:64px 24px 100px}
 #sun h1{font-size:clamp(2.2rem,7vw,3.2rem);font-weight:900;letter-spacing:-.03em;margin-bottom:4px}
-#sun .sub{font-family:var(--mono);font-size:clamp(.85rem,2vw,1rem);color:#666;margin-bottom:12px}
-#sun .school{font-size:.9rem;color:#555;margin-bottom:40px;padding:8px 14px;background:#f5f5f5;border-radius:8px;display:inline-block}
+#sun .sub{font-family:var(--mono);font-size:clamp(.85rem,2vw,1rem);color:#666;margin-bottom:8px}
+#sun .bio{font-size:.92rem;color:#555;line-height:1.7;margin-bottom:10px;max-width:520px}
+#sun .school{font-size:.85rem;color:#555;margin-bottom:40px;padding:8px 14px;background:#f5f5f5;border-radius:8px;display:inline-block}
 #sun .stitle{font-family:var(--mono);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;
 color:#888;margin-bottom:16px;padding-bottom:6px;border-bottom:2px solid #1a1a1a;display:inline-block}
 #sun .stitle:not(:first-of-type){margin-top:40px}
@@ -138,6 +161,20 @@ color:#888;margin-bottom:16px;padding-bottom:6px;border-bottom:2px solid #1a1a1a
 .clist a{color:#1a1a1a;text-decoration:none;font-family:var(--mono);font-size:.88rem}
 .clist a:hover{color:#0066cc}
 .clist span{color:#999;font-size:.75rem;margin-right:8px}
+.theme-bar{margin-bottom:40px;padding:16px 20px;background:linear-gradient(135deg,#f8f9fa,#e9ecef);
+border-radius:10px;border-left:3px solid #1a1a1a}
+.theme-bar p{font-size:.9rem;line-height:1.7;color:#444}
+.theme-bar strong{color:#1a1a1a}
+
+/* Page load */
+body{animation:fadeIn .8s ease-out}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+/* Focus */
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+body.sun :focus-visible{outline-color:#1a1a1a}
+
+/* Sun scroll */
+#sun{scroll-behavior:smooth}
 
 @media(max-width:400px){.pgrid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
@@ -145,12 +182,12 @@ color:#888;margin-bottom:16px;padding-bottom:6px;border-bottom:2px solid #1a1a1a
 </head>
 <body>
 <canvas id="particles"></canvas>
-<button id="toggle" onclick="toggle()">☀️</button>
+<button id="toggle" onclick="toggle()" aria-label="모드 전환">☀️</button>
 <div id="hint">클릭해서 탐험하세요 ✦</div>
 
 <!-- ===== MOON MODE ===== -->
 <div id="moon">
-  <div class="brain" onclick="showModal(brainHTML())">
+  <div class="brain" onclick="showModal(brainHTML())" role="button" aria-label="내 아이디어와 만든 것들">
     <svg viewBox="0 0 200 180" fill="none" stroke="#00ff9f" stroke-linecap="round">
       <path d="M100 12C52 12 8 55 8 95c0 28 16 56 48 68 12 5 28 4 44-5" stroke-width="2.5"/>
       <path d="M100 12c48 0 92 43 92 83 0 28-16 56-48 68-12 5-28 4-44-5" stroke-width="2.5"/>
@@ -171,7 +208,12 @@ color:#888;margin-bottom:16px;padding-bottom:6px;border-bottom:2px solid #1a1a1a
   <div class="wrap">
     <h1>이상규</h1>
     <p class="sub">데이터에서 사람을 읽는다</p>
+    <p class="bio">AI를 도구로 삼아 사람을 이해하는 제품을 만든다. 코드를 직접 짜기보다 AI에게 시키는 쪽. 분석은 헌신이라고 생각한다.</p>
     <p class="school">한성대학교 기업경영트랙 3학년 · 노무사 시험 준비 중</p>
+
+    <div class="theme-bar">
+      <p><strong>관통하는 하나의 주제:</strong> 데이터에서 사람을 읽는 것. 풀림, 인간30, AI 심리테스트, 카톡 분석기 — 입력만 다를 뿐, 하려는 건 같다.</p>
+    </div>
 
     <div class="stitle">Projects</div>
     <div class="sgrid" id="sun-projects"></div>
@@ -191,7 +233,7 @@ color:#888;margin-bottom:16px;padding-bottom:6px;border-bottom:2px solid #1a1a1a
 <!-- ===== MODAL ===== -->
 <div id="modal" onclick="if(event.target===this)hideModal()">
   <div id="mcard">
-    <button id="mclose" onclick="hideModal()">✕</button>
+    <button id="mclose" onclick="hideModal()" aria-label="닫기">✕</button>
     <div id="mbody"></div>
   </div>
 </div>
@@ -237,7 +279,7 @@ const LEAVES = [
 ];
 
 const BRAIN = [
-  {n:"풀림",d:"AI 코칭/상담 앱. 대화에서 패턴을 읽고 맞춤 코칭",b:"wip"},
+  {n:"풀림",d:"AI 코칭/상담 앱. 대화에서 패턴을 읽고 맞춤 코칭",b:"live",l:"https://pullim.vercel.app"},
   {n:"인간30",d:"30명 가상 인간의 행동 시뮬레이터. 4층 28개 데이터 모델",b:"wip"},
   {n:"31번 캐릭터",d:"인간30의 31번째. 관찰자이자 질문자",b:"idea"},
   {n:"AI 개인화 심리테스트",d:"184문항 심리측정 → AI 행동지침 변환",b:"live",l:"https://lee3q.github.io/psych-test/"},
@@ -256,7 +298,7 @@ const STARS = [
 ];
 
 const SUN_PROJECTS = [
-  {n:"풀림",d:"AI 코칭/상담 앱. 대화에서 사람의 패턴을 읽고 맞춤 코칭. Next.js + Vercel 배포",l:null},
+  {n:"풀림",d:"AI 코칭/상담 앱. 대화에서 사람의 패턴을 읽고 맞춤 코칭. Next.js + Vercel 배포",l:"https://pullim.vercel.app"},
   {n:"인간30",d:"30명 가상 인간 행동 시뮬레이터. 4층 데이터 모델(Body/Memory/Identity/World Map), 28개 옵션표",l:null},
   {n:"AI 개인화 심리테스트",d:"184문항 심리측정 → AI 행동지침 변환. 가치관/동기/애착/인지스타일 4영역",l:"https://lee3q.github.io/psych-test/"},
   {n:"카톡 분석기",d:"카카오톡 대화 데이터 패턴 분석 도구. Python + PWA",l:null},
@@ -285,8 +327,11 @@ STONES.forEach((s,i) => {
   const el = document.createElement('div');
   el.className = 'obj stone';
   el.style.cssText = `left:${s.x}%;top:${s.y}%;animation:${anims[i%4]} ${16+i*3}s ${i*1.5}s ease-in-out infinite`;
-  el.innerHTML = stoneSVG;
+  const preview = s.t.replace(/\n/g,' ').slice(0,18) + (s.t.length > 18 ? '…' : '');
+  el.innerHTML = stoneSVG + `<span class="tip">${preview}</span>`;
   el.onclick = () => showModal(stoneHTML(s));
+  el.setAttribute('role','button');
+  el.setAttribute('aria-label',s.t.replace(/\n/g,' '));
   moon.appendChild(el);
 });
 
@@ -295,18 +340,22 @@ LEAVES.forEach((l,i) => {
   const el = document.createElement('div');
   el.className = 'obj leaf';
   el.style.cssText = `left:${l.x}%;top:${l.y}%;animation:${leafAnims[i%2]} ${14+i*2.5}s ${i*1.2}s ease-in-out infinite`;
-  el.innerHTML = leafSVG;
+  el.innerHTML = leafSVG + `<span class="tip">${l.t}</span>`;
   el.onclick = () => showModal(leafHTML(l));
+  el.setAttribute('role','button');
+  el.setAttribute('aria-label',l.t);
   moon.appendChild(el);
 });
 
-STARS.forEach(s => {
+STARS.forEach((s,i) => {
   const el = document.createElement('div');
   el.className = 'obj star';
   el.style.cssText = `left:${s.x}%;top:${s.y}%`;
-  el.innerHTML = starSVG;
+  el.innerHTML = starSVG + `<span class="tip">${s.label}</span>`;
+  el.querySelector('svg').style.animationDelay = `${i * 1.1}s`;
   el.onclick = () => window.open(s.href, '_blank');
-  el.title = s.label;
+  el.setAttribute('role','link');
+  el.setAttribute('aria-label',s.label);
   moon.appendChild(el);
 });
 
@@ -333,7 +382,7 @@ function brainHTML() {
       <h3>${p.n}</h3>
       <p>${p.d}</p>
       <span class="badge ${p.b}">${p.b.toUpperCase()}</span>
-      ${p.l ? `<br><a href="${p.l}" target="_blank">열기 →</a>` : ''}
+      ${p.l ? `<a href="${p.l}" target="_blank">열기 →</a>` : ''}
     </div>`).join('');
   return `<h2>내 아이디어와 만든 것들</h2><div class="pgrid">${cards}</div>`;
 }
@@ -381,6 +430,7 @@ function toggle() {
   moonEl.classList.toggle('off', isSun);
   sunEl.classList.toggle('on', isSun);
   toggleBtn.textContent = isSun ? '🌙' : '☀️';
+  if (!isSun) moonEl.style.transform = '';
 }
 
 // ===== PARTICLE CANVAS =====
@@ -420,13 +470,18 @@ function drawParticles() {
 }
 drawParticles();
 
-// ===== PARALLAX =====
-document.addEventListener('mousemove', e => {
+// ===== PARALLAX (mouse + touch) =====
+function doParallax(cx, cy) {
   if (isSun) return;
-  const mx = (e.clientX / W - 0.5) * 8;
-  const my = (e.clientY / H - 0.5) * 8;
+  const mx = (cx / W - 0.5) * 8;
+  const my = (cy / H - 0.5) * 8;
   moonEl.style.transform = `translate(${mx}px, ${my}px)`;
-});
+}
+document.addEventListener('mousemove', e => doParallax(e.clientX, e.clientY));
+document.addEventListener('touchmove', e => {
+  const t = e.touches[0];
+  if (t) doParallax(t.clientX, t.clientY);
+}, {passive: true});
 </script>
 </body>
 </html>
