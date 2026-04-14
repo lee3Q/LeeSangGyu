@@ -4,24 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>이상규 월드</title>
-<meta name="description" content="이 사람의 머릿속에 들어온 세계">
+<meta name="description" content="데이터에서 사람을 읽는 사람. 이상규.">
 <meta property="og:title" content="이상규 월드">
-<meta property="og:description" content="데이터에서 사람을 읽는다. AI를 도구로 사람을 이해하는 제품을 만든다.">
+<meta property="og:description" content="AI를 도구로 삼아 사람을 이해하는 제품을 만든다.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://lee3q.github.io/LeeSangGyu/">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 10C26 10 8 32 8 52c0 14 8 28 24 34 6 2 14 2 22-2' fill='none' stroke='%2300ff9f' stroke-width='4'/><path d='M50 10c24 0 42 22 42 42 0 14-8 28-24 34-6 2-14 2-22-2' fill='none' stroke='%2300ff9f' stroke-width='4'/><path d='M50 10v74' stroke='%2300ff9f' stroke-width='1.5' opacity='.3'/><path d='M38 84c5-5 11-6 16-3 5-3 11-2 16 3' fill='none' stroke='%2300ff9f' stroke-width='2.5' opacity='.5'/></svg>">
+<meta property="og:url" content="https://lee3Q.github.io/LeeSangGyu/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300ff9f' stroke-width='4'/><circle cx='38' cy='44' r='6' fill='%2300ff9f'/><circle cx='62' cy='44' r='6' fill='%2300ff9f'/><path d='M36 64q14 8 28 0' fill='none' stroke='%2300ff9f' stroke-width='3'/></svg>">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#060612;--fg:#e8e8f0;--accent:#00ff9f;--accent2:#ff3366;--gold:#ffd700;
---green:#3d7a5d;--purple:#8b5cf6;--dim:#999;
---mono:'JetBrains Mono',monospace;--sans:'Noto Sans KR',sans-serif}
+--dim:#999;--mono:'JetBrains Mono',monospace;--sans:'Noto Sans KR',sans-serif}
 html,body{width:100%;height:100%;font-family:var(--sans)}
 body{background:#fff;color:#1a1a1a;overflow-y:auto;transition:background .6s,color .6s}
-body.moon{background:var(--bg);color:var(--fg);overflow:hidden}
+body.moon{background:var(--bg);color:var(--fg);overflow:hidden;overscroll-behavior:none}
 
 #particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .6s}
-body.moon #particles{opacity:.7}
+body.moon #particles{opacity:.75}
 
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:transparent}
@@ -32,162 +31,196 @@ body.moon ::-webkit-scrollbar-thumb{background:rgba(0,255,159,.25)}
 #toggle{position:fixed;top:16px;right:16px;z-index:1000;width:48px;height:48px;border-radius:50%;
 border:2px solid rgba(0,0,0,.1);background:rgba(255,255,255,.9);backdrop-filter:blur(8px);
 cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s}
-#toggle:hover{border-color:#1a1a1a;transform:scale(1.1)}
+#toggle:hover{border-color:#1a1a1a;transform:scale(1.08) rotate(15deg)}
 body.moon #toggle{border-color:rgba(255,255,255,.15);background:rgba(0,0,0,.4)}
-#toggle svg{width:24px;height:24px}
+#toggle svg{width:26px;height:26px}
 
 /* ===== HINT ===== */
 #hint{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:100;
-font-family:var(--mono);font-size:.7rem;color:var(--dim);letter-spacing:.12em;
-animation:pulse 2.5s infinite;transition:opacity .5s;white-space:nowrap;display:none}
-body.moon #hint{display:block;color:#777}
+font-family:var(--mono);font-size:.7rem;color:#777;letter-spacing:.12em;
+animation:pulse 2.5s infinite;transition:opacity .5s;white-space:nowrap;display:none;text-align:center}
+body.moon #hint{display:block}
 #hint.gone{opacity:0;pointer-events:none}
-@keyframes pulse{0%,100%{opacity:.3}50%{opacity:.7}}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:.75}}
 
 /* ===== STILL BUTTON ===== */
-#stillBtn{position:fixed;bottom:20px;right:16px;z-index:1000;padding:8px 16px;border-radius:20px;
-border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.5);backdrop-filter:blur(8px);
-color:#888;font-family:var(--mono);font-size:.75rem;cursor:pointer;transition:all .3s;
-display:none}
+#stillBtn{position:fixed;bottom:20px;right:16px;z-index:1000;padding:9px 18px;border-radius:20px;
+border:1px solid rgba(255,255,255,.15);background:rgba(0,0,0,.5);backdrop-filter:blur(8px);
+color:#aaa;font-family:var(--mono);font-size:.72rem;cursor:pointer;transition:all .3s;
+display:none;letter-spacing:.05em}
 body.moon #stillBtn{display:block}
-#stillBtn:hover{border-color:var(--accent);color:var(--accent)}
+#stillBtn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
 #stillBtn.on{border-color:#ff3366;color:#ff3366;background:rgba(255,51,102,.1)}
 
 /* ===== MOON MODE ===== */
 #moon{position:fixed;inset:0;z-index:1;transition:opacity .6s,visibility .6s;
-opacity:0;visibility:hidden;pointer-events:none}
+opacity:0;visibility:hidden;pointer-events:none;overflow:hidden}
 body.moon #moon{opacity:1;visibility:visible;pointer-events:auto}
 
-/* Characters container */
-#moon{overflow:hidden}
-
-/* Brain */
+/* Brain (center wandering idea hub) */
 .brain{position:absolute;cursor:pointer;z-index:10;transition:filter .3s}
-.brain svg{width:100%;height:auto;filter:drop-shadow(0 0 12px rgba(0,255,159,.25));transition:filter .3s}
-.brain:hover svg{filter:drop-shadow(0 0 28px rgba(0,255,159,.55))}
+.brain svg{width:100%;height:auto;filter:drop-shadow(0 0 14px rgba(0,255,159,.3));transition:filter .3s}
+.brain:hover svg{filter:drop-shadow(0 0 32px rgba(0,255,159,.65))}
 
-/* Generic floating object */
-.obj{position:absolute;cursor:pointer;transition:filter .2s}
-.obj:hover{filter:brightness(1.3)!important;z-index:20}
-.obj:hover .mouth-open{opacity:1}
+/* Floating face (person/animal) */
+.obj{position:absolute;cursor:pointer;transition:filter .25s,transform .25s}
+.obj:hover{filter:brightness(1.25) saturate(1.2)!important;z-index:30}
 .obj:hover .mouth-closed{opacity:0}
-.mouth-closed{transition:opacity .2s}
-.mouth-open{transition:opacity .2s}
+.obj:hover .mouth-open{opacity:1}
+.mouth-closed,.mouth-open{transition:opacity .2s}
 
-/* Eye layer */
-.eyes{opacity:0;transition:opacity .5s}
-.frozen .eyes{opacity:1}
-.pupil{transition:transform .08s linear}
+/* Tooltip balloon on hover */
+.tip{position:absolute;left:50%;top:-10px;transform:translate(-50%,-100%);
+background:rgba(0,0,0,.9);color:var(--accent);border:1px solid rgba(0,255,159,.35);
+padding:6px 12px;border-radius:14px;font-family:var(--mono);font-size:.72rem;
+white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;
+letter-spacing:.02em;box-shadow:0 4px 16px rgba(0,0,0,.5);z-index:40;font-weight:400}
+.tip::after{content:'';position:absolute;left:50%;bottom:-5px;transform:translateX(-50%) rotate(45deg);
+width:8px;height:8px;background:rgba(0,0,0,.9);border-right:1px solid rgba(0,255,159,.35);
+border-bottom:1px solid rgba(0,255,159,.35)}
+.obj:hover .tip{opacity:1;transform:translate(-50%,-100%) translateY(-4px)}
 
-/* Float animations */
-@keyframes f1{0%,100%{transform:translate(0,0)}25%{transform:translate(18px,-14px)}50%{transform:translate(-12px,16px)}75%{transform:translate(14px,8px)}}
-@keyframes f2{0%,100%{transform:translate(0,0)}25%{transform:translate(-14px,8px)}50%{transform:translate(16px,-6px)}75%{transform:translate(-8px,-14px)}}
-@keyframes f3{0%,100%{transform:translate(0,0)}25%{transform:translate(10px,14px)}50%{transform:translate(-16px,8px)}75%{transform:translate(8px,-16px)}}
-@keyframes f4{0%,100%{transform:translate(0,0)}25%{transform:translate(-8px,-10px)}50%{transform:translate(14px,14px)}75%{transform:translate(-14px,6px)}}
+/* Eyes: 평소엔 감김, "가만히 있어" 누르면 떠서 쳐다봄 */
+.pupil{transition:transform .12s ease-out}
+.highlight{pointer-events:none}
+.eyes-open{opacity:0;transition:opacity .6s}
+.eyes-closed{opacity:1;transition:opacity .6s}
+.frozen .eyes-open{opacity:1}
+.frozen .eyes-closed{opacity:0}
+.blinking > svg{animation:blinkSquish .18s ease-in-out}
+@keyframes blinkSquish{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.88)}}
+svg{display:block}
+
+/* Float animations — much wider range */
+@keyframes f1{0%,100%{transform:translate(0,0) rotate(0)}
+  20%{transform:translate(80px,-60px) rotate(3deg)}
+  40%{transform:translate(-50px,70px) rotate(-2deg)}
+  60%{transform:translate(70px,40px) rotate(4deg)}
+  80%{transform:translate(-60px,-30px) rotate(-3deg)}}
+@keyframes f2{0%,100%{transform:translate(0,0) rotate(0)}
+  25%{transform:translate(-70px,50px) rotate(-4deg)}
+  50%{transform:translate(90px,-40px) rotate(3deg)}
+  75%{transform:translate(-40px,-80px) rotate(-2deg)}}
+@keyframes f3{0%,100%{transform:translate(0,0) rotate(0)}
+  30%{transform:translate(60px,80px) rotate(5deg)}
+  50%{transform:translate(-80px,40px) rotate(-3deg)}
+  70%{transform:translate(50px,-70px) rotate(2deg)}}
+@keyframes f4{0%,100%{transform:translate(0,0) rotate(0)}
+  20%{transform:translate(-50px,-70px) rotate(-4deg)}
+  45%{transform:translate(80px,80px) rotate(3deg)}
+  70%{transform:translate(-90px,30px) rotate(-2deg)}}
+@keyframes f5{0%,100%{transform:translate(0,0) rotate(0)}
+  33%{transform:translate(100px,-20px) rotate(4deg)}
+  66%{transform:translate(-80px,60px) rotate(-3deg)}}
 @keyframes brainWander{
-0%{transform:translate(0,0) scale(1)}
-10%{transform:translate(30px,-20px) scale(1.02)}
-20%{transform:translate(-15px,25px) scale(.98)}
-30%{transform:translate(25px,10px) scale(1.01)}
-40%{transform:translate(-20px,-15px) scale(.99)}
-50%{transform:translate(10px,30px) scale(1.03)}
-60%{transform:translate(-25px,-5px) scale(.97)}
-70%{transform:translate(20px,-25px) scale(1.02)}
-80%{transform:translate(-10px,15px) scale(.98)}
-90%{transform:translate(15px,-10px) scale(1.01)}
-100%{transform:translate(0,0) scale(1)}}
+  0%,100%{transform:translate(0,0) scale(1)}
+  15%{transform:translate(80px,-50px) scale(1.03)}
+  30%{transform:translate(-60px,70px) scale(.97)}
+  45%{transform:translate(90px,40px) scale(1.02)}
+  60%{transform:translate(-70px,-60px) scale(.98)}
+  75%{transform:translate(50px,80px) scale(1.04)}
+  90%{transform:translate(-40px,-30px) scale(.99)}}
 
-/* Frozen state */
 .frozen{animation-play-state:paused!important}
+.frozen .tip{display:none}
 
 /* ===== MODAL ===== */
 #modal{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;
-background:rgba(255,255,255,.9);backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+background:rgba(255,255,255,.92);backdrop-filter:blur(10px);opacity:0;visibility:hidden;
+transition:opacity .3s,visibility .3s;padding:16px}
 #modal.on{opacity:1;visibility:visible}
-body.moon #modal{background:rgba(6,6,18,.75)}
-#mcard{background:#fff;border:1px solid #e0e0e0;border-radius:16px;padding:28px 24px;
-max-width:520px;width:92%;max-height:82vh;overflow-y:auto;position:relative;
+body.moon #modal{background:rgba(6,6,18,.82)}
+#mcard{background:#fff;border:1px solid #e0e0e0;border-radius:18px;padding:32px 26px 26px;
+max-width:540px;width:100%;max-height:85vh;overflow-y:auto;position:relative;
 transform:scale(.92);transition:transform .35s cubic-bezier(.16,1,.3,1)}
 #modal.on #mcard{transform:scale(1)}
-body.moon #mcard{background:#0c0c1a;border-color:rgba(0,255,159,.2)}
+body.moon #mcard{background:#0a0a16;border-color:rgba(0,255,159,.22)}
 #mclose{position:absolute;top:12px;right:14px;background:none;border:none;color:#999;
-font-size:1.4rem;cursor:pointer;line-height:1}
-#mclose:hover{color:#1a1a1a}
-body.moon #mclose:hover{color:var(--accent)}
+font-size:1.5rem;cursor:pointer;line-height:1;padding:4px 8px;border-radius:6px}
+#mclose:hover{color:#1a1a1a;background:#f0f0f0}
+body.moon #mclose{color:#777}
+body.moon #mclose:hover{color:var(--accent);background:rgba(0,255,159,.08)}
 
-/* Modal content */
-#mbody h2{font-size:1.15rem;font-weight:700;margin-bottom:16px;color:#1a1a1a}
+#mbody h2{font-size:1.2rem;font-weight:800;margin-bottom:14px;color:#1a1a1a;letter-spacing:-.01em}
 body.moon #mbody h2{color:var(--accent)}
-#mbody p{line-height:1.85;margin-bottom:10px;font-size:.9rem;color:#333}
-body.moon #mbody p{color:var(--fg)}
-#mbody .qtext{font-size:1.1rem;font-weight:700;text-align:center;padding:18px 8px;line-height:1.7;color:#1a1a1a}
-body.moon #mbody .qtext{color:var(--fg)}
-#mbody .detail{font-size:.82rem;color:#666;margin-top:8px;padding:10px 14px;border-radius:8px;background:#f5f5f5;line-height:1.7}
-body.moon #mbody .detail{background:rgba(255,255,255,.05);color:#aaa}
-.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.pcard{background:#f7f7f7;border:1px solid #e8e8e8;border-radius:10px;
-padding:12px;transition:border-color .3s;cursor:default}
-.pcard:hover{border-color:#1a1a1a}
-body.moon .pcard{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
-body.moon .pcard:hover{border-color:var(--accent)}
-.pcard h3{font-size:.9rem;font-weight:700;margin-bottom:3px}
-.pcard p{font-size:.78rem;color:#666;margin:0;line-height:1.5}
-body.moon .pcard p{color:#aaa}
-.pcard a{font-family:var(--mono);font-size:.72rem;color:#0066cc;text-decoration:none;display:inline-block;margin-top:4px}
+#mbody p{line-height:1.8;margin-bottom:10px;font-size:.92rem;color:#333}
+body.moon #mbody p{color:#dadae2}
+#mbody .qtext{font-size:1.15rem;font-weight:700;text-align:center;padding:16px 6px 10px;
+line-height:1.65;color:#1a1a1a;letter-spacing:-.01em}
+body.moon #mbody .qtext{color:#fff}
+#mbody .qtext::before,#mbody .qtext::after{content:'"';color:#00ff9f;opacity:.5;margin:0 4px}
+#mbody .detail{font-size:.88rem;color:#555;margin-top:12px;padding:14px 16px;border-radius:10px;
+background:#f7f7f7;line-height:1.8;border-left:3px solid #1a1a1a}
+body.moon #mbody .detail{background:rgba(255,255,255,.04);color:#c8c8d0;border-left-color:var(--accent)}
+#mbody .tag{display:inline-block;font-family:var(--mono);font-size:.7rem;
+padding:3px 10px;border-radius:12px;background:#eee;color:#666;margin-bottom:12px;letter-spacing:.05em}
+body.moon #mbody .tag{background:rgba(0,255,159,.1);color:var(--accent)}
+
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pcard{background:#f8f8f8;border:1px solid #e8e8e8;border-radius:12px;padding:14px;transition:all .25s}
+.pcard:hover{border-color:#1a1a1a;transform:translateY(-2px)}
+body.moon .pcard{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08)}
+body.moon .pcard:hover{border-color:var(--accent);background:rgba(0,255,159,.04)}
+.pcard h3{font-size:.92rem;font-weight:700;margin-bottom:4px}
+.pcard p{font-size:.78rem;color:#666;margin:0;line-height:1.55}
+body.moon .pcard p{color:#a8a8b0}
+.pcard a{font-family:var(--mono);font-size:.72rem;color:#0066cc;text-decoration:none;display:inline-block;margin-top:6px}
 body.moon .pcard a{color:var(--accent)}
-.badge{font-family:var(--mono);font-size:.6rem;padding:2px 7px;border-radius:4px;display:inline-block;margin-top:5px}
-.badge.live{background:rgba(0,180,100,.1);color:#00b464}
+.badge{font-family:var(--mono);font-size:.58rem;padding:2px 7px;border-radius:4px;display:inline-block;margin-top:6px;letter-spacing:.06em}
+.badge.live{background:rgba(0,180,100,.12);color:#00b464}
 .badge.idea{background:rgba(139,92,246,.12);color:#8b5cf6}
 .badge.wip{background:rgba(255,51,102,.12);color:#ff3366}
-.badge.tool{background:rgba(255,180,0,.12);color:#c89600}
-.slist{list-style:none;padding:0}
-.slist li{padding:6px 0;border-bottom:1px solid #eee;font-family:var(--mono);font-size:.82rem;color:#444}
-body.moon .slist li{border-color:rgba(255,255,255,.06);color:#bbb}
-.slist li:last-child{border-bottom:none}
 
-/* ===== SUN MODE ===== */
+/* ===== SUN MODE (Resume) ===== */
 #sun{position:relative;z-index:2;min-height:100vh;background:#fff;color:#1a1a1a}
 body.moon #sun{display:none}
-#sun .wrap{max-width:680px;margin:0 auto;padding:64px 24px 100px}
-#sun h1{font-size:clamp(2.2rem,7vw,3.2rem);font-weight:900;letter-spacing:-.03em;margin-bottom:4px}
-#sun .sub{font-family:var(--mono);font-size:clamp(.85rem,2vw,1rem);color:#666;margin-bottom:8px}
-#sun .bio{font-size:.92rem;color:#555;line-height:1.7;margin-bottom:10px;max-width:520px}
-#sun .school{font-size:.85rem;color:#555;margin-bottom:40px;padding:8px 14px;background:#f5f5f5;border-radius:8px;display:inline-block}
-#sun .stitle{font-family:var(--mono);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;
-color:#888;margin-bottom:16px;padding-bottom:6px;border-bottom:2px solid #1a1a1a;display:inline-block}
-#sun .stitle:not(:first-of-type){margin-top:40px}
+#sun .wrap{max-width:720px;margin:0 auto;padding:72px 24px 120px}
+#sun h1{font-size:clamp(2.4rem,7vw,3.4rem);font-weight:900;letter-spacing:-.03em;margin-bottom:6px;line-height:1.05}
+#sun .sub{font-family:var(--mono);font-size:clamp(.88rem,2vw,1rem);color:#666;margin-bottom:14px;letter-spacing:.02em}
+#sun .bio{font-size:.95rem;color:#444;line-height:1.8;margin-bottom:14px;max-width:600px}
+#sun .school{font-size:.82rem;color:#555;margin-bottom:44px;padding:8px 14px;background:#f5f5f5;border-radius:8px;display:inline-block;font-family:var(--mono)}
+#sun .stitle{font-family:var(--mono);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;
+color:#555;margin-bottom:18px;margin-top:44px;padding-bottom:8px;border-bottom:2px solid #1a1a1a;display:inline-block;font-weight:700}
+#sun .stitle:first-of-type{margin-top:0}
 .sgrid{display:grid;gap:14px;margin-bottom:8px}
-.scard{background:#fafafa;border:1px solid #e8e8e8;border-radius:12px;padding:18px;transition:all .3s}
-.scard:hover{border-color:#1a1a1a;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.06)}
-.scard h3{font-size:1.05rem;font-weight:700;margin-bottom:3px}
-.scard p{font-size:.82rem;color:#666;line-height:1.6;margin:0}
-.scard a{font-family:var(--mono);font-size:.78rem;color:#0066cc;text-decoration:none}
+.scard{background:#fafafa;border:1px solid #eaeaea;border-radius:14px;padding:20px 22px;transition:all .3s;opacity:0;transform:translateY(14px)}
+.scard.in{opacity:1;transform:translateY(0)}
+.scard:hover{border-color:#1a1a1a;transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.07)}
+.scard h3{font-size:1.08rem;font-weight:700;margin-bottom:6px;letter-spacing:-.01em}
+.scard p{font-size:.86rem;color:#555;line-height:1.65;margin:0 0 6px}
+.scard a{font-family:var(--mono);font-size:.76rem;color:#0066cc;text-decoration:none;word-break:break-all}
 .scard a:hover{text-decoration:underline}
+.scard .meta{font-family:var(--mono);font-size:.68rem;color:#999;letter-spacing:.06em;text-transform:uppercase;margin-top:8px;display:block}
 .stags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
-.stag{background:#f0f0f0;padding:5px 12px;border-radius:20px;font-size:.82rem;font-family:var(--mono)}
+.stag{background:#f0f0f0;padding:6px 13px;border-radius:20px;font-size:.8rem;font-family:var(--mono);color:#333}
 .clist{list-style:none;padding:0}
-.clist li{padding:10px 0;border-bottom:1px solid #eee}
-.clist a{color:#1a1a1a;text-decoration:none;font-family:var(--mono);font-size:.88rem}
+.clist li{padding:12px 0;border-bottom:1px solid #eee;display:flex;align-items:center;gap:12px}
+.clist li:last-child{border-bottom:none}
+.clist a{color:#1a1a1a;text-decoration:none;font-family:var(--mono);font-size:.9rem;flex:1}
 .clist a:hover{color:#0066cc}
-.clist span{color:#999;font-size:.75rem;margin-right:8px}
-.theme-bar{margin-bottom:40px;padding:16px 20px;background:linear-gradient(135deg,#f8f9fa,#e9ecef);
-border-radius:10px;border-left:3px solid #1a1a1a}
-.theme-bar p{font-size:.9rem;line-height:1.7;color:#444}
-.theme-bar strong{color:#1a1a1a}
+.clist span{color:#999;font-size:.7rem;font-family:var(--mono);min-width:70px;letter-spacing:.05em}
+.theme-bar{margin-bottom:36px;padding:18px 22px;background:linear-gradient(135deg,#f8f9fa,#eef0f3);
+border-radius:12px;border-left:4px solid #1a1a1a}
+.theme-bar p{font-size:.92rem;line-height:1.75;color:#333}
+.theme-bar strong{color:#1a1a1a;font-weight:800}
 
-body{animation:fadeIn .8s ease-out}
+body{animation:fadeIn .7s ease-out}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-:focus-visible{outline:2px solid #1a1a1a;outline-offset:2px;border-radius:4px}
+:focus-visible{outline:2px solid #1a1a1a;outline-offset:3px;border-radius:6px}
 body.moon :focus-visible{outline-color:var(--accent)}
 #sun{scroll-behavior:smooth}
-@media(max-width:400px){.pgrid{grid-template-columns:1fr}}
+
+@media(max-width:520px){
+  .pgrid{grid-template-columns:1fr}
+  #sun .wrap{padding:56px 20px 100px}
+  #mcard{padding:28px 20px 22px}
+}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
 <canvas id="particles"></canvas>
 
-<!-- Toggle: SVG sun/moon -->
 <button id="toggle" onclick="toggle()" aria-label="모드 전환">
   <svg id="toggleIcon" viewBox="0 0 40 40" fill="none">
     <circle cx="20" cy="20" r="9" fill="#f59e0b" stroke="#d97706" stroke-width="1.5"/>
@@ -200,31 +233,47 @@ body.moon :focus-visible{outline-color:var(--accent)}
   </svg>
 </button>
 
-<div id="hint">클릭해서 탐험하세요 ✦</div>
+<div id="hint">호버 = 한마디 · 클릭 = 이야기 · "가만히 있어" = 나를 본다</div>
 <button id="stillBtn" onclick="toggleStill()">가만히 있어</button>
 
 <!-- ===== MOON MODE ===== -->
 <div id="moon"></div>
 
-<!-- ===== SUN MODE ===== -->
+<!-- ===== SUN MODE (Resume) ===== -->
 <div id="sun">
   <div class="wrap">
     <h1>이상규</h1>
-    <p class="sub">데이터에서 사람을 읽는다</p>
-    <p class="bio">AI를 도구로 삼아 사람을 이해하는 제품을 만든다. 대화, 생체 데이터, 관계, 심리테스트 — 어떤 입력이든 사람을 읽고 구조화하는 게 내 일이다. 코드는 AI에게 시키고, 나는 '무엇을 만들지' 생각한다.</p>
-    <p class="school">한성대학교 기업경영트랙 3학년 · 노무사 시험 준비 중</p>
+    <p class="sub">데이터에서 사람을 읽는다.</p>
+    <p class="bio">AI를 도구가 아니라 <strong>신경계</strong>로 쓴다. 대화·생체·관계·심리검사 — 어떤 입력이든 사람을 구조화해서, 그 위에 더 나은 경험을 얹는 게 내 일이다. 코드는 AI에게 시키고, 나는 "무엇을 만들지"에 집중한다.</p>
+    <p class="school">한성대학교 기업경영트랙 3학년 · 공인노무사 준비 중 · 2001</p>
+
     <div class="theme-bar">
-      <p><strong>관통하는 하나의 주제:</strong> 데이터에서 사람을 읽는 것. 풀림, 인간30, AI 심리테스트, 카톡 분석기 — 입력만 다를 뿐, 하려는 건 같다.</p>
+      <p><strong>관통하는 하나의 주제.</strong> 풀림, 인간30, AI 심리테스트, 카톡 분석기 — 입력만 다를 뿐 하려는 건 같다. 이 사람이 어떤 사람인지 구조화해서, 그걸로 더 나은 경험을 만드는 것.</p>
     </div>
+
     <div class="stitle">Projects</div>
     <div class="sgrid" id="sun-projects"></div>
 
-    <div class="stitle">Philosophy</div>
-    <div class="theme-bar" style="border-left-color:#f59e0b">
-      <p><strong>분석은 헌신이다.</strong> 누군가를 깊이 분석하는 건 그 사람에게 가장 깊이 관심 갖는 방식이다. 이별한 날 삼겹살을 먹으면서 사랑 마무리 분석 보고서를 썼다. 남들은 무감정이라고 하지만, 나에게는 그게 감정을 처리하는 방식이다. 나는 데이터에서 사람을 읽고, 그 구조화된 이해를 바탕으로 더 나은 경험을 만든다.</p>
-    </div>
-    <div class="stitle">Skills & Tools</div>
+    <div class="stitle">Tools & Utilities</div>
+    <p style="font-size:.82rem;color:#777;margin:-6px 0 14px;line-height:1.6">창작 프로젝트는 아니지만, 해야 해서 만든 것들.</p>
+    <div class="sgrid" id="sun-tools"></div>
+
+    <div class="stitle">How I Work</div>
+    <div class="sgrid" id="sun-workflow"></div>
+
+    <div class="stitle">Skills</div>
     <div class="stags" id="sun-skills"></div>
+
+    <div class="stitle">Philosophy at Work</div>
+    <div class="theme-bar" style="border-left-color:#f59e0b;margin-top:8px">
+      <p><strong>코드 공부는 시간 낭비.</strong> AI에게 시키는 게 맞다. 내 역할은 "무엇을 만들지" 결정하는 거지, 문법을 외우는 게 아니다. 그래서 비개발자인데 Claude Code 위에 스킬 13개·에이전트 4개·자동화 파이프라인을 쌓아 썼다.</p>
+    </div>
+    <div class="theme-bar" style="border-left-color:#8b5cf6">
+      <p><strong>한 AI를 믿지 않는다.</strong> 같은 질문을 Claude·Gemini·Perplexity에 동시에 던지고, 한 모델의 답을 다른 모델이 검증하게 한다. 할루시네이션을 줄이는 가장 싼 방법이다.</p>
+    </div>
+    <div class="theme-bar" style="border-left-color:#00b464">
+      <p><strong>의사결정은 수정하지 않는다.</strong> 한번 내린 판단은 판례 폴더에 영구 보존한다. 당시의 상태와 당시의 논리가 그대로 남아야, 다음 판단에서 진짜로 참조가 된다.</p>
+    </div>
 
     <div class="stitle">Interests</div>
     <div class="stags">
@@ -234,13 +283,16 @@ body.moon :focus-visible{outline-color:var(--accent)}
       <span class="stag">노동법</span>
       <span class="stag">AI 개인화</span>
       <span class="stag">생체 데이터</span>
+      <span class="stag">의사결정 이론</span>
     </div>
+
     <div class="stitle">Contact</div>
     <ul class="clist">
       <li><span>Email</span><a href="mailto:andy53295774@gmail.com">andy53295774@gmail.com</a></li>
-      <li><span>GitHub</span><a href="https://github.com/lee3Q" target="_blank">github.com/lee3Q</a></li>
-      <li><span>LinkedIn</span><a href="https://linkedin.com/in/lee39/" target="_blank">linkedin.com/in/lee39/</a></li>
+      <li><span>GitHub</span><a href="https://github.com/lee3Q" target="_blank" rel="noopener">github.com/lee3Q</a></li>
+      <li><span>LinkedIn</span><a href="https://linkedin.com/in/lee39/" target="_blank" rel="noopener">linkedin.com/in/lee39/</a></li>
     </ul>
+    <p style="font-family:var(--mono);font-size:.7rem;color:#aaa;margin-top:40px;text-align:center;letter-spacing:.1em">← 왼쪽 위 버튼 눌러서 달 모드로 →</p>
   </div>
 </div>
 
@@ -253,120 +305,305 @@ body.moon :focus-visible{outline-color:var(--accent)}
 </div>
 
 <script>
-// ===== SVG GENERATORS =====
-function personSVG(color) {
-  return `<svg viewBox="0 0 50 70" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round">
-    <circle cx="25" cy="12" r="8" fill="none"/>
-    <path d="M17 10q3-6 8-6t8 6" stroke-width="1" opacity=".4"/>
-    <path d="M25 20v18" stroke-width="1.4"/>
-    <path d="M17 28h16" stroke-width="1.3"/>
-    <path d="M25 38l-8 14M25 38l8 14" stroke-width="1.4"/>
-    <path d="M25 38l-10 16M25 38l10 16" stroke-width="1" opacity=".3"/>
-    <path class="mouth-closed" d="M21 15h8" stroke-width="1.2" opacity="1"/>
-    <path class="mouth-open" d="M21 13.5q4 4 8 0" stroke-width="1.2" fill="rgba(255,255,255,.05)" opacity="0"/>
-    <g class="eyes">
-      <circle cx="21" cy="11" r="2.8" fill="none" stroke="${color}" stroke-width="1"/>
-      <circle cx="29" cy="11" r="2.8" fill="none" stroke="${color}" stroke-width="1"/>
-      <circle class="pupil" data-cx="21" data-cy="11" cx="21" cy="11" r="1.4" fill="#111"/>
-      <circle class="pupil" data-cx="29" data-cy="11" cx="29" cy="11" r="1.4" fill="#111"/>
+// ===== FACE SVG: 둥글고 표정 있는 얼굴만 (몸 없음) =====
+function faceSVG(opts) {
+  const {skin='#e8a87c', hair='short', hairColor='#2a1810', eyeColor='#1a1a1a',
+         accent=null, expression='neutral'} = opts;
+
+  // 헤어 스타일들 (머리 위 장식)
+  const hairs = {
+    short: `<path d="M18 22q0-14 12-14t12 14" fill="${hairColor}"/>`,
+    long: `<path d="M16 24q0-16 14-16t14 16v18h-4v-12q-2 6-10 6t-10-6v12h-4z" fill="${hairColor}"/>`,
+    wave: `<path d="M16 22q2-14 14-14t14 14q-3-4-7-4t-7 4-6-4-8 4z" fill="${hairColor}"/>`,
+    cap: `<path d="M14 22q0-12 16-12t16 12v2h-32z" fill="${hairColor}"/>
+          <rect x="10" y="22" width="40" height="3" rx="1" fill="${hairColor}" opacity=".7"/>`,
+    bald: `<path d="M22 12q2-4 8-4t8 4" stroke="${hairColor}" stroke-width="1" fill="none" opacity=".3"/>`,
+    messy: `<path d="M14 22q1-4 4-4 0-4 4-4 2-6 8-6 4-2 6 2 5-1 6 4 4 0 4 4 3 0 4 4-5 2-9-2-4 4-8 0-6 4-10 0-4 4-9 2z" fill="${hairColor}"/>`,
+    ponytail: `<path d="M16 22q0-14 14-14t14 14" fill="${hairColor}"/>
+               <path d="M42 20q8 2 10 14t-4 16q-2-8 2-14t-8-10z" fill="${hairColor}"/>`,
+    afro: `<circle cx="30" cy="14" r="16" fill="${hairColor}"/>
+           <circle cx="18" cy="18" r="5" fill="${hairColor}"/><circle cx="42" cy="18" r="5" fill="${hairColor}"/>
+           <circle cx="22" cy="8" r="4" fill="${hairColor}"/><circle cx="38" cy="8" r="4" fill="${hairColor}"/>`,
+    flat: `<path d="M16 20q0-12 14-12t14 12v3h-28z" fill="${hairColor}"/>`,
+    horn: `<path d="M18 22q0-14 12-14t12 14" fill="${hairColor}"/>
+           <path d="M22 10l-3-7 6 3z" fill="${hairColor}"/><path d="M38 10l3-7-6 3z" fill="${hairColor}"/>`,
+    halo: `<path d="M18 22q0-14 12-14t12 14" fill="${hairColor}"/>
+           <ellipse cx="30" cy="2" rx="10" ry="2" fill="none" stroke="#ffd700" stroke-width="1.2"/>`,
+    bangs: `<path d="M16 22q0-14 14-14t14 14q-2-2-4-2-1 4-4 4-2-3-5-3-2 3-5 3-3 0-4-4-2 0-6 2z" fill="${hairColor}"/>`,
+    parted: `<path d="M16 22q0-14 14-14t14 14q-3-3-6-3-1 3-3 3l-4-6-5 6q-3 0-4-3-3 0-6 3z" fill="${hairColor}"/>`
+  };
+
+  // 표정 (입)
+  const mouths = {
+    neutral: {closed:`<path d="M26 44q4 1 8 0" stroke="#555" stroke-width="1.3" fill="none" stroke-linecap="round"/>`,
+              open:`<ellipse cx="30" cy="45" rx="3.5" ry="2.5" fill="#3a1515"/><ellipse cx="30" cy="44" rx="2.5" ry="1" fill="#ff6b6b" opacity=".6"/>`},
+    smile: {closed:`<path d="M25 43q5 4 10 0" stroke="#555" stroke-width="1.4" fill="none" stroke-linecap="round"/>`,
+            open:`<path d="M24 42q6 6 12 0q-3 3-6 3t-6-3z" fill="#3a1515"/><path d="M26 42q4 3 8 0" stroke="#ff8080" stroke-width=".8" fill="none"/>`},
+    smirk: {closed:`<path d="M26 44q3 2 5 1t3-2" stroke="#555" stroke-width="1.3" fill="none" stroke-linecap="round"/>`,
+            open:`<path d="M25 43q5 4 10 0" stroke="#333" stroke-width="1.5" fill="#3a1515"/>`},
+    oh: {closed:`<ellipse cx="30" cy="44" rx="1.5" ry="1.5" fill="#555" opacity=".6"/>`,
+         open:`<ellipse cx="30" cy="44" rx="3" ry="3" fill="#3a1515"/>`},
+    line: {closed:`<line x1="26" y1="44" x2="34" y2="44" stroke="#555" stroke-width="1.3" stroke-linecap="round"/>`,
+           open:`<ellipse cx="30" cy="44" rx="3" ry="2" fill="#3a1515"/>`}
+  };
+
+  const m = mouths[expression] || mouths.neutral;
+
+  // 강세 장식 (귀걸이, 안경, 점 등)
+  const accents = {
+    glasses: `<circle cx="21" cy="28" r="6" fill="none" stroke="#222" stroke-width="1.2"/>
+              <circle cx="39" cy="28" r="6" fill="none" stroke="#222" stroke-width="1.2"/>
+              <line x1="27" y1="28" x2="33" y2="28" stroke="#222" stroke-width="1.2"/>`,
+    mole: `<circle cx="36" cy="38" r="1" fill="#3a1810"/>`,
+    earring: `<circle cx="13" cy="34" r="1.4" fill="#ffd700"/><circle cx="47" cy="34" r="1.4" fill="#ffd700"/>`,
+    freckles: `<circle cx="22" cy="36" r=".8" fill="#a06040" opacity=".5"/>
+               <circle cx="38" cy="36" r=".8" fill="#a06040" opacity=".5"/>
+               <circle cx="26" cy="34" r=".6" fill="#a06040" opacity=".5"/>`,
+    scar: `<path d="M40 22l2 6" stroke="#c06060" stroke-width="1" opacity=".6"/>`,
+    null:''
+  };
+
+  return `<svg viewBox="0 0 60 56" xmlns="http://www.w3.org/2000/svg">
+    <!-- 얼굴 베이스 -->
+    <ellipse cx="30" cy="30" rx="20" ry="22" fill="${skin}"/>
+    <!-- 목의 그림자 살짝 -->
+    <ellipse cx="30" cy="52" rx="6" ry="2" fill="${skin}" opacity=".5"/>
+    <!-- 헤어 -->
+    ${hairs[hair] || hairs.short}
+    <!-- 볼 -->
+    <circle cx="16" cy="36" r="3" fill="#ff8080" opacity=".28"/>
+    <circle cx="44" cy="36" r="3" fill="#ff8080" opacity=".28"/>
+    <!-- 감은 눈 (평소) -->
+    <g class="eyes-closed">
+      <path d="M18 30q4 2 8 0" stroke="${hairColor}" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+      <path d="M34 30q4 2 8 0" stroke="${hairColor}" stroke-width="1.3" fill="none" stroke-linecap="round"/>
     </g>
+    <!-- 뜬 눈 (가만히 있어 모드) -->
+    <g class="eyes-open">
+      <ellipse cx="22" cy="30" rx="4.5" ry="4" fill="#fff"/>
+      <ellipse cx="38" cy="30" rx="4.5" ry="4" fill="#fff"/>
+      <circle class="pupil" data-cx="22" data-cy="30" cx="22" cy="30" r="2.4" fill="${eyeColor}"/>
+      <circle class="pupil" data-cx="38" data-cy="30" cx="38" cy="30" r="2.4" fill="${eyeColor}"/>
+      <circle class="highlight" cx="23.2" cy="28.8" r="1" fill="#fff"/>
+      <circle class="highlight" cx="39.2" cy="28.8" r="1" fill="#fff"/>
+    </g>
+    <!-- 눈썹 -->
+    <path d="M17 23q3-2 7-1" stroke="${hairColor}" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+    <path d="M37 22q4-1 7 1" stroke="${hairColor}" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+    <!-- 코 -->
+    <path d="M29 34q-1 4 1 5" stroke="#a0805a" stroke-width=".8" fill="none" opacity=".5"/>
+    <!-- 강세 -->
+    ${accents[accent] || ''}
+    <!-- 입 -->
+    <g class="mouth-closed">${m.closed}</g>
+    <g class="mouth-open" style="opacity:0">${m.open}</g>
   </svg>`;
 }
 
-function animalSVG(type, color) {
-  const templates = {
-    cat: `<svg viewBox="0 0 50 50" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round">
-      <path d="M15 18l-4-10 7 6M35 18l4-10-7 6"/>
-      <ellipse cx="25" cy="28" rx="14" ry="12"/>
-      <path class="mouth-closed" d="M21 32h8" stroke-width="1.2"/>
-      <path class="mouth-open" d="M20 31q5 5 10 0" stroke-width="1.2" fill="rgba(255,255,255,.05)" opacity="0"/>
-      <g class="eyes"><circle cx="20" cy="26" r="2.5" stroke="${color}"/><circle cx="30" cy="26" r="2.5" stroke="${color}"/>
-      <circle class="pupil" data-cx="20" data-cy="26" cx="20" cy="26" r="1.2" fill="#111"/>
-      <circle class="pupil" data-cx="30" data-cy="26" cx="30" cy="26" r="1.2" fill="#111"/></g>
-      <path d="M25 34q0 3-3 5M25 34q0 3 3 5" stroke-width="1" opacity=".5"/>
-      <path d="M11 27l7-1M11 29l7 1M39 27l-7-1M39 29l-7 1" stroke-width=".8" opacity=".35"/></svg>`,
-    dog: `<svg viewBox="0 0 50 50" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round">
-      <ellipse cx="25" cy="26" rx="13" ry="11"/>
-      <path d="M12 22q-5-8-2-14 4 4 8 6" stroke-width="1.3"/>
-      <path d="M38 22q5-8 2-14-4 4-8 6" stroke-width="1.3"/>
-      <circle cx="21" cy="24" r="1.5" fill="${color}" opacity=".5"/>
-      <circle cx="29" cy="24" r="1.5" fill="${color}" opacity=".5"/>
-      <path class="mouth-closed" d="M21 30h8" stroke-width="1.2"/>
-      <path class="mouth-open" d="M20 29q5 5 10 0" stroke-width="1.2" fill="rgba(255,255,255,.05)" opacity="0"/>
-      <g class="eyes"><circle cx="21" cy="23" r="2.5" stroke="${color}"/><circle cx="29" cy="23" r="2.5" stroke="${color}"/>
-      <circle class="pupil" data-cx="21" data-cy="23" cx="21" cy="23" r="1.2" fill="#111"/>
-      <circle class="pupil" data-cx="29" data-cy="23" cx="29" cy="23" r="1.2" fill="#111"/></g>
-      <ellipse cx="25" cy="28" rx="2" ry="1.5" fill="${color}" opacity=".3"/></svg>`,
-    bird: `<svg viewBox="0 0 50 45" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round">
-      <ellipse cx="25" cy="22" rx="12" ry="10"/>
-      <circle cx="25" cy="13" r="7"/>
-      <path d="M18 13l-6-2" stroke-width="1.3"/>
-      <path d="M25 32q-3 6-8 8M25 32q3 6 8 8" stroke-width="1.2"/>
-      <path class="mouth-closed" d="M22 16h6" stroke-width="1.2"/>
-      <path class="mouth-open" d="M21 15q4 4 8 0" stroke-width="1.2" fill="rgba(255,255,255,.05)" opacity="0"/>
-      <g class="eyes"><circle cx="22" cy="12" r="2" stroke="${color}"/><circle cx="28" cy="12" r="2" stroke="${color}"/>
-      <circle class="pupil" data-cx="22" data-cy="12" cx="22" cy="12" r="1" fill="#111"/>
-      <circle class="pupil" data-cx="28" data-cy="12" cx="28" cy="12" r="1" fill="#111"/></g></svg>`,
-    fish: `<svg viewBox="0 0 55 35" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round">
-      <ellipse cx="25" cy="17" rx="18" ry="12"/>
-      <path d="M43 17l10-8v16z"/>
-      <path class="mouth-closed" d="M9 16h5" stroke-width="1.2"/>
-      <path class="mouth-open" d="M8 14q4 3 6 0" stroke-width="1.2" fill="rgba(255,255,255,.05)" opacity="0"/>
-      <g class="eyes"><circle cx="17" cy="14" r="2.5" stroke="${color}"/>
-      <circle class="pupil" data-cx="17" data-cy="14" cx="17" cy="14" r="1.2" fill="#111"/></g>
-      <path d="M25 5q2 5 0 10" stroke-width=".8" opacity=".4"/></svg>`,
-    owl: `<svg viewBox="0 0 50 55" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round">
-      <ellipse cx="25" cy="30" rx="15" ry="18"/>
-      <circle cx="18" cy="22" r="6"/><circle cx="32" cy="22" r="6"/>
-      <path d="M10 15l-5-8M40 15l5-8" stroke-width="1.3"/>
-      <path class="mouth-closed" d="M22 30h6" stroke-width="1.2"/>
-      <path class="mouth-open" d="M21 29q4 4 8 0" stroke-width="1.2" fill="rgba(255,255,255,.05)" opacity="0"/>
-      <g class="eyes"><circle cx="18" cy="22" r="3" stroke="${color}"/><circle cx="32" cy="22" r="3" stroke="${color}"/>
-      <circle class="pupil" data-cx="18" data-cy="22" cx="18" cy="22" r="1.5" fill="#111"/>
-      <circle class="pupil" data-cx="32" data-cy="22" cx="32" cy="22" r="1.5" fill="#111"/></g>
-      <path d="M25 34l-2 4 2-1 2 1z" stroke-width="1" opacity=".5"/></svg>`,
-    fox: `<svg viewBox="0 0 50 50" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round">
-      <path d="M12 20l-6-14 10 8M38 20l6-14-10 8"/>
-      <ellipse cx="25" cy="28" rx="14" ry="12"/>
-      <path class="mouth-closed" d="M21 32h8" stroke-width="1.2"/>
-      <path class="mouth-open" d="M20 31q5 5 10 0" stroke-width="1.2" fill="rgba(255,255,255,.05)" opacity="0"/>
-      <g class="eyes"><circle cx="20" cy="25" r="2.5" stroke="${color}"/><circle cx="30" cy="25" r="2.5" stroke="${color}"/>
-      <circle class="pupil" data-cx="20" data-cy="25" cx="20" cy="25" r="1.2" fill="#111"/>
-      <circle class="pupil" data-cx="30" data-cy="25" cx="30" cy="25" r="1.2" fill="#111"/></g>
-      <ellipse cx="25" cy="28" rx="2" ry="1.5" fill="${color}" opacity=".3"/></svg>`,
-    rabbit: `<svg viewBox="0 0 50 55" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round">
-      <ellipse cx="25" cy="32" rx="13" ry="14"/>
-      <circle cx="25" cy="17" r="8"/>
-      <path d="M19 12q-2-12 2-12t2 12" stroke-width="1.3"/>
-      <path d="M29 12q2-12 6-12t-2 12" stroke-width="1.3"/>
-      <path class="mouth-closed" d="M22 20h6" stroke-width="1.2"/>
-      <path class="mouth-open" d="M21 19q4 4 8 0" stroke-width="1.2" fill="rgba(255,255,255,.05)" opacity="0"/>
-      <g class="eyes"><circle cx="21" cy="16" r="2.5" stroke="${color}"/><circle cx="29" cy="16" r="2.5" stroke="${color}"/>
-      <circle class="pupil" data-cx="21" data-cy="16" cx="21" cy="16" r="1.2" fill="#111"/>
-      <circle class="pupil" data-cx="29" data-cy="16" cx="29" cy="16" r="1.2" fill="#111"/></g></svg>`,
-    bear: `<svg viewBox="0 0 50 50" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round">
-      <ellipse cx="25" cy="28" rx="15" ry="14"/>
-      <circle cx="14" cy="14" r="5"/><circle cx="36" cy="14" r="5"/>
-      <circle cx="25" cy="17" r="9"/>
-      <path class="mouth-closed" d="M21 20h8" stroke-width="1.2"/>
-      <path class="mouth-open" d="M20 19q5 5 10 0" stroke-width="1.2" fill="rgba(255,255,255,.05)" opacity="0"/>
-      <g class="eyes"><circle cx="21" cy="16" r="2.5" stroke="${color}"/><circle cx="29" cy="16" r="2.5" stroke="${color}"/>
-      <circle class="pupil" data-cx="21" data-cy="16" cx="21" cy="16" r="1.2" fill="#111"/>
-      <circle class="pupil" data-cx="29" data-cy="16" cx="29" cy="16" r="1.2" fill="#111"/></g>
-      <ellipse cx="25" cy="19" rx="2.5" ry="1.8" fill="${color}" opacity=".25"/></svg>`,
-    turtle: `<svg viewBox="0 0 55 40" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round">
-      <ellipse cx="28" cy="22" rx="18" ry="12"/>
-      <path d="M28 10q-6-2-12 2" stroke-width="1.2" opacity=".4"/>
-      <circle cx="10" cy="20" r="5"/>
-      <path d="M10 25l-2 8M28 34l-2 6M28 34l2 6M46 25l4 6" stroke-width="1.3"/>
-      <path class="mouth-closed" d="M7 19h4" stroke-width="1.2"/>
-      <path class="mouth-open" d="M6 18q3 3 6 0" stroke-width="1.2" fill="rgba(255,255,255,.05)" opacity="0"/>
-      <g class="eyes"><circle cx="8" cy="18" r="2" stroke="${color}"/>
-      <circle class="pupil" data-cx="8" data-cy="18" cx="8" cy="18" r="1" fill="#111"/></g></svg>`
+// ===== ANIMAL FACE SVG (얼굴만, 귀 포함) =====
+function animalFace(type, color='#8b5cf6') {
+  const faces = {
+    cat: `<svg viewBox="0 0 60 56">
+      <!-- 귀 -->
+      <path d="M10 18l4-14 10 10z" fill="${color}"/>
+      <path d="M50 18l-4-14-10 10z" fill="${color}"/>
+      <path d="M13 16l3-8 5 7" fill="#ff9080" opacity=".5"/>
+      <path d="M47 16l-3-8-5 7" fill="#ff9080" opacity=".5"/>
+      <!-- 얼굴 -->
+      <ellipse cx="30" cy="32" rx="19" ry="18" fill="${color}"/>
+      <!-- 수염 자리 -->
+      <ellipse cx="30" cy="38" rx="8" ry="5" fill="#fff" opacity=".15"/>
+      <!-- 감은 눈 -->
+      <g class="eyes-closed">
+        <path d="M18 30q4 2 8 0" stroke="#111" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M34 30q4 2 8 0" stroke="#111" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      </g>
+      <g class="eyes-open">
+        <ellipse cx="22" cy="30" rx="4" ry="4" fill="#fff"/>
+        <ellipse cx="38" cy="30" rx="4" ry="4" fill="#fff"/>
+        <ellipse class="pupil" data-cx="22" data-cy="30" cx="22" cy="30" rx="1.2" ry="3" fill="#111"/>
+        <ellipse class="pupil" data-cx="38" data-cy="30" cx="38" cy="30" rx="1.2" ry="3" fill="#111"/>
+        <circle class="highlight" cx="22.8" cy="29" r=".7" fill="#fff"/>
+        <circle class="highlight" cx="38.8" cy="29" r=".7" fill="#fff"/>
+      </g>
+      <!-- 코 -->
+      <path d="M28 38l2 2 2-2-2 1z" fill="#ff6080"/>
+      <!-- 입 -->
+      <g class="mouth-closed"><path d="M30 40v2q0 2-3 2M30 42q0 2 3 2" stroke="#333" stroke-width="1.2" fill="none" stroke-linecap="round"/></g>
+      <g class="mouth-open" style="opacity:0"><ellipse cx="30" cy="44" rx="3" ry="2.5" fill="#3a1515"/></g>
+      <!-- 수염 -->
+      <path d="M12 38l8 1M12 42l8-1M48 38l-8 1M48 42l-8-1" stroke="${color}" stroke-width=".6" opacity=".5"/>
+    </svg>`,
+    dog: `<svg viewBox="0 0 60 56">
+      <!-- 귀 (늘어진) -->
+      <ellipse cx="12" cy="22" rx="7" ry="12" fill="${color}" transform="rotate(-15 12 22)"/>
+      <ellipse cx="48" cy="22" rx="7" ry="12" fill="${color}" transform="rotate(15 48 22)"/>
+      <!-- 얼굴 -->
+      <ellipse cx="30" cy="32" rx="18" ry="17" fill="${color}"/>
+      <!-- 주둥이 -->
+      <ellipse cx="30" cy="40" rx="9" ry="6" fill="#d8b890"/>
+      <g class="eyes-closed">
+        <path d="M19 28q4 2 8 0" stroke="#111" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M33 28q4 2 8 0" stroke="#111" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      </g>
+      <g class="eyes-open">
+        <ellipse cx="23" cy="28" rx="3.5" ry="3.5" fill="#fff"/>
+        <ellipse cx="37" cy="28" rx="3.5" ry="3.5" fill="#fff"/>
+        <circle class="pupil" data-cx="23" data-cy="28" cx="23" cy="28" r="2" fill="#111"/>
+        <circle class="pupil" data-cx="37" data-cy="28" cx="37" cy="28" r="2" fill="#111"/>
+        <circle class="highlight" cx="23.7" cy="27.2" r=".7" fill="#fff"/>
+        <circle class="highlight" cx="37.7" cy="27.2" r=".7" fill="#fff"/>
+      </g>
+      <!-- 코 -->
+      <ellipse cx="30" cy="36" rx="2.5" ry="1.8" fill="#2a1810"/>
+      <!-- 입 -->
+      <g class="mouth-closed"><path d="M30 39v3q-2 2-4 1M30 42q2 2 4 1" stroke="#333" stroke-width="1.3" fill="none" stroke-linecap="round"/></g>
+      <g class="mouth-open" style="opacity:0"><path d="M24 41q6 7 12 0q-2 4-6 4t-6-4z" fill="#3a1515"/><ellipse cx="30" cy="44" rx="3" ry="1.5" fill="#ff6080"/></g>
+    </svg>`,
+    bird: `<svg viewBox="0 0 60 56">
+      <ellipse cx="30" cy="30" rx="18" ry="20" fill="${color}"/>
+      <path d="M20 14q-3-10 0-12t5 8" fill="${color}"/>
+      <path d="M40 14q3-10 0-12t-5 8" fill="${color}"/>
+      <g class="eyes-closed">
+        <path d="M19 28q4 2 8 0" stroke="#111" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M33 28q4 2 8 0" stroke="#111" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      </g>
+      <g class="eyes-open">
+        <ellipse cx="23" cy="28" rx="4" ry="4" fill="#fff"/>
+        <ellipse cx="37" cy="28" rx="4" ry="4" fill="#fff"/>
+        <circle class="pupil" data-cx="23" data-cy="28" cx="23" cy="28" r="2.2" fill="#111"/>
+        <circle class="pupil" data-cx="37" data-cy="28" cx="37" cy="28" r="2.2" fill="#111"/>
+        <circle class="highlight" cx="24" cy="27" r=".8" fill="#fff"/>
+        <circle class="highlight" cx="38" cy="27" r=".8" fill="#fff"/>
+      </g>
+      <g class="mouth-closed"><path d="M26 38l4 4 4-4-4 2z" fill="#ff9500"/></g>
+      <g class="mouth-open" style="opacity:0"><path d="M24 37l6 8 6-8-6 2z" fill="#ff9500"/></g>
+    </svg>`,
+    owl: `<svg viewBox="0 0 60 56">
+      <ellipse cx="30" cy="32" rx="20" ry="20" fill="${color}"/>
+      <path d="M12 16l-4-10 12 4" fill="${color}"/>
+      <path d="M48 16l4-10-12 4" fill="${color}"/>
+      <g class="eyes-closed">
+        <path d="M16 28q6 2 12 0" stroke="#111" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+        <path d="M32 28q6 2 12 0" stroke="#111" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+      </g>
+      <g class="eyes-open">
+        <circle cx="22" cy="28" r="7" fill="#fff"/>
+        <circle cx="38" cy="28" r="7" fill="#fff"/>
+        <circle class="pupil" data-cx="22" data-cy="28" cx="22" cy="28" r="4" fill="#111"/>
+        <circle class="pupil" data-cx="38" data-cy="28" cx="38" cy="28" r="4" fill="#111"/>
+        <circle class="highlight" cx="23.5" cy="26.5" r="1.2" fill="#fff"/>
+        <circle class="highlight" cx="39.5" cy="26.5" r="1.2" fill="#fff"/>
+      </g>
+      <g class="mouth-closed"><path d="M28 38l2 3 2-3-2 1z" fill="#ff9500"/></g>
+      <g class="mouth-open" style="opacity:0"><path d="M26 37l4 7 4-7-4 2z" fill="#ff9500"/></g>
+      <path d="M14 42q3 4 8 3M46 42q-3 4-8 3" stroke="${color}" stroke-width=".8" opacity=".5" fill="none"/>
+    </svg>`,
+    fox: `<svg viewBox="0 0 60 56">
+      <path d="M8 16l6-12 10 10z" fill="${color}"/>
+      <path d="M52 16l-6-12-10 10z" fill="${color}"/>
+      <path d="M11 14l4-8 5 7" fill="#fff" opacity=".3"/>
+      <path d="M49 14l-4-8-5 7" fill="#fff" opacity=".3"/>
+      <ellipse cx="30" cy="32" rx="18" ry="18" fill="${color}"/>
+      <path d="M20 36q10 8 20 0q-4 6-10 6t-10-6z" fill="#fff" opacity=".25"/>
+      <g class="eyes-closed">
+        <path d="M18 28q4 2 8 0" stroke="#111" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M34 28q4 2 8 0" stroke="#111" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      </g>
+      <g class="eyes-open">
+        <ellipse cx="22" cy="28" rx="3.5" ry="3.5" fill="#fff"/>
+        <ellipse cx="38" cy="28" rx="3.5" ry="3.5" fill="#fff"/>
+        <ellipse class="pupil" data-cx="22" data-cy="28" cx="22" cy="28" rx="1.5" ry="2.8" fill="#111"/>
+        <ellipse class="pupil" data-cx="38" data-cy="28" cx="38" cy="28" rx="1.5" ry="2.8" fill="#111"/>
+        <circle class="highlight" cx="23" cy="27" r=".7" fill="#fff"/>
+        <circle class="highlight" cx="39" cy="27" r=".7" fill="#fff"/>
+      </g>
+      <ellipse cx="30" cy="38" rx="2" ry="1.5" fill="#2a1810"/>
+      <g class="mouth-closed"><path d="M30 39v3M26 43q4 2 8 0" stroke="#333" stroke-width="1.2" fill="none" stroke-linecap="round"/></g>
+      <g class="mouth-open" style="opacity:0"><path d="M24 41q6 6 12 0q-3 4-6 4t-6-4z" fill="#3a1515"/></g>
+    </svg>`,
+    rabbit: `<svg viewBox="0 0 60 60">
+      <ellipse cx="20" cy="10" rx="4" ry="10" fill="${color}"/>
+      <ellipse cx="40" cy="10" rx="4" ry="10" fill="${color}"/>
+      <ellipse cx="20" cy="10" rx="1.8" ry="6" fill="#ff9080" opacity=".5"/>
+      <ellipse cx="40" cy="10" rx="1.8" ry="6" fill="#ff9080" opacity=".5"/>
+      <ellipse cx="30" cy="34" rx="18" ry="16" fill="${color}"/>
+      <g class="eyes-closed">
+        <path d="M18 30q4 2 8 0" stroke="#111" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M34 30q4 2 8 0" stroke="#111" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      </g>
+      <g class="eyes-open">
+        <ellipse cx="22" cy="30" rx="3.5" ry="3.5" fill="#fff"/>
+        <ellipse cx="38" cy="30" rx="3.5" ry="3.5" fill="#fff"/>
+        <circle class="pupil" data-cx="22" data-cy="30" cx="22" cy="30" r="2" fill="#111"/>
+        <circle class="pupil" data-cx="38" data-cy="30" cx="38" cy="30" r="2" fill="#111"/>
+        <circle class="highlight" cx="22.8" cy="29.2" r=".7" fill="#fff"/>
+        <circle class="highlight" cx="38.8" cy="29.2" r=".7" fill="#fff"/>
+      </g>
+      <path d="M30 38l-1.5 2h3z" fill="#ff6080"/>
+      <g class="mouth-closed"><path d="M30 40v2M27 44q3 1 3 0t3 0" stroke="#333" stroke-width="1.2" fill="none" stroke-linecap="round"/></g>
+      <g class="mouth-open" style="opacity:0"><ellipse cx="30" cy="44" rx="2.5" ry="2" fill="#3a1515"/><path d="M28 42l2 1 2-1" stroke="#fff" stroke-width="1.2" fill="none"/></g>
+    </svg>`,
+    bear: `<svg viewBox="0 0 60 56">
+      <circle cx="14" cy="16" r="6" fill="${color}"/>
+      <circle cx="46" cy="16" r="6" fill="${color}"/>
+      <circle cx="14" cy="16" r="3" fill="#fff" opacity=".25"/>
+      <circle cx="46" cy="16" r="3" fill="#fff" opacity=".25"/>
+      <ellipse cx="30" cy="32" rx="19" ry="19" fill="${color}"/>
+      <ellipse cx="30" cy="38" rx="9" ry="7" fill="#e8c898" opacity=".9"/>
+      <g class="eyes-closed">
+        <path d="M20 28q3 2 6 0" stroke="#111" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M34 28q3 2 6 0" stroke="#111" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      </g>
+      <g class="eyes-open">
+        <ellipse cx="23" cy="28" rx="3" ry="3" fill="#fff"/>
+        <ellipse cx="37" cy="28" rx="3" ry="3" fill="#fff"/>
+        <circle class="pupil" data-cx="23" data-cy="28" cx="23" cy="28" r="1.8" fill="#111"/>
+        <circle class="pupil" data-cx="37" data-cy="28" cx="37" cy="28" r="1.8" fill="#111"/>
+        <circle class="highlight" cx="23.7" cy="27.3" r=".6" fill="#fff"/>
+        <circle class="highlight" cx="37.7" cy="27.3" r=".6" fill="#fff"/>
+      </g>
+      <ellipse cx="30" cy="36" rx="2.5" ry="1.8" fill="#2a1810"/>
+      <g class="mouth-closed"><path d="M30 38v3M27 42q3 2 6 0" stroke="#333" stroke-width="1.3" fill="none" stroke-linecap="round"/></g>
+      <g class="mouth-open" style="opacity:0"><path d="M24 40q6 6 12 0q-3 4-6 4t-6-4z" fill="#3a1515"/></g>
+    </svg>`,
+    fish: `<svg viewBox="0 0 60 50">
+      <ellipse cx="28" cy="25" rx="20" ry="15" fill="${color}"/>
+      <path d="M48 25l10-10v20z" fill="${color}"/>
+      <path d="M8 17q4 3 4 8t-4 8" stroke="${color}" stroke-width="1" fill="none" opacity=".4"/>
+      <g class="eyes-closed">
+        <path d="M18 22q4 2 8 0" stroke="#111" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      </g>
+      <g class="eyes-open">
+        <ellipse cx="22" cy="22" rx="4" ry="4" fill="#fff"/>
+        <circle class="pupil" data-cx="22" data-cy="22" cx="22" cy="22" r="2.2" fill="#111"/>
+        <circle class="highlight" cx="23" cy="21" r=".8" fill="#fff"/>
+      </g>
+      <g class="mouth-closed"><path d="M10 28q3 1 6 0" stroke="#333" stroke-width="1.2" fill="none" stroke-linecap="round"/></g>
+      <g class="mouth-open" style="opacity:0"><ellipse cx="10" cy="27" rx="3" ry="2" fill="#3a1515"/></g>
+      <path d="M32 18q4 4 0 14M40 20q3 3 0 10" stroke="#fff" stroke-width=".6" fill="none" opacity=".3"/>
+    </svg>`,
+    turtle: `<svg viewBox="0 0 60 50">
+      <ellipse cx="30" cy="26" rx="22" ry="18" fill="${color}"/>
+      <path d="M20 14q4-2 10-2t10 2M16 26q-2-2 0-6M44 26q2-2 0-6" stroke="#fff" stroke-width=".8" fill="none" opacity=".4"/>
+      <path d="M22 20q0 3-2 5M30 18q0 3 0 5M38 20q0 3 2 5" stroke="#fff" stroke-width=".8" fill="none" opacity=".4"/>
+      <circle cx="8" cy="24" r="6" fill="#d8c898"/>
+      <g class="eyes-closed">
+        <path d="M4 23q3 2 6 0" stroke="#111" stroke-width="1" fill="none" stroke-linecap="round"/>
+      </g>
+      <g class="eyes-open">
+        <ellipse cx="7" cy="23" rx="2.5" ry="2.5" fill="#fff"/>
+        <circle class="pupil" data-cx="7" data-cy="23" cx="7" cy="23" r="1.5" fill="#111"/>
+        <circle class="highlight" cx="7.5" cy="22.5" r=".5" fill="#fff"/>
+      </g>
+      <g class="mouth-closed"><path d="M4 27q3 1 6 0" stroke="#333" stroke-width="1" fill="none"/></g>
+      <g class="mouth-open" style="opacity:0"><ellipse cx="7" cy="27" rx="2" ry="1.3" fill="#3a1515"/></g>
+    </svg>`
   };
-  return templates[type] || templates.cat;
+  return faces[type] || faces.cat;
 }
 
+// ===== BRAIN SVG =====
 const brainSVG = `<svg viewBox="0 0 200 180" fill="none" stroke="#00ff9f" stroke-linecap="round">
   <path d="M100 12C52 12 8 55 8 95c0 28 16 56 48 68 12 5 28 4 44-5" stroke-width="2.5"/>
   <path d="M100 12c48 0 92 43 92 83 0 28-16 56-48 68-12 5-28 4-44-5" stroke-width="2.5"/>
@@ -378,166 +615,298 @@ const brainSVG = `<svg viewBox="0 0 200 180" fill="none" stroke="#00ff9f" stroke
   <path d="M142 90c8 12 6 24-4 35" stroke-width="1" opacity=".3"/>
   <path d="M100 12v128" stroke-width=".7" opacity=".18"/>
   <path d="M68 155c10-10 22-12 32-7 10-5 22-3 32 7" stroke-width="1.4" opacity=".5"/>
-  <g class="eyes">
-    <circle cx="75" cy="65" r="8" stroke="#00ff9f" stroke-width="1.5"/>
-    <circle cx="125" cy="65" r="8" stroke="#00ff9f" stroke-width="1.5"/>
-    <circle class="pupil" data-cx="75" data-cy="65" cx="75" cy="65" r="4" fill="#111"/>
-    <circle class="pupil" data-cx="125" data-cy="65" cx="125" cy="65" r="4" fill="#111"/>
+  <g class="eyes-closed">
+    <path d="M66 70q9 3 18 0" stroke="#00ff9f" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M116 70q9 3 18 0" stroke="#00ff9f" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </g>
+  <g class="eyes-open">
+    <circle cx="75" cy="70" r="11" fill="#0a0a16" stroke="#00ff9f" stroke-width="1.5"/>
+    <circle cx="125" cy="70" r="11" fill="#0a0a16" stroke="#00ff9f" stroke-width="1.5"/>
+    <circle class="pupil" data-cx="75" data-cy="70" cx="75" cy="70" r="6" fill="#00ff9f"/>
+    <circle class="pupil" data-cx="125" data-cy="70" cx="125" cy="70" r="6" fill="#00ff9f"/>
+    <circle class="highlight" cx="78" cy="67" r="2" fill="#fff"/>
+    <circle class="highlight" cx="128" cy="67" r="2" fill="#fff"/>
   </g>
 </svg>`;
 
-// ===== DATA =====
+// ===== DATA: 달 모드 사람들 (호버 15자 이내, 클릭 상세) =====
+// 선별 기준: "이 사람 뭐야?" 흥미 유발. 당연한 건 제외.
 const PEOPLE = [
-  {t:"한성대학교 기업경영트랙 3학년", detail:"경영을 전공하면서도 교실보다 프로젝트에서 더 많이 배운다. 학위는 수단이지 목적이 아니다.",
-   x:14,y:12,color:"#e8a87c"},
-  {t:"지옥을 같이 갈 수 있는 것.\n그게 진짜 가치다.", detail:"편안한 관계가 아니라 서로의 가장 어두운 면을 알고도 남는 관계. 힘들 때 진짜가 드러난다고 믿는다. 그걸 견뎌주는 사람이 가치 있다.",
-   x:76,y:16,color:"#c4a882"},
-  {t:"논리로 사람을 필터링해왔다.", detail:"감정보다 논리가 먼저 작동하는 구조다. 처음엔 '소시오패스인가'라고 스스로 의심했지만, 분석해보니 고도의 추상적 사고가 감정 인식보다 빨라서 생기는 현상이었다. 감정이 없는 게 아니라, 감정에 이름 붙이는 속도가 느린 것.",
-   x:8,y:46,color:"#b8a08a"},
-  {t:"성공과 실패는 명확히 구분한다.", detail:"실패에 의미부여 하지 않는다. '실패도 경험이다' 같은 위로가 아니라, 실패는 실패로 끝나고 다음 행동만이 의미 있다. ICC 창업심사 탈락도 실패로 끝났고, 그 다음에 할 일을 했을 뿐.",
-   x:84,y:42,color:"#d4b896"},
-  {t:"AI 코드 공부는 시간낭비.", detail:"AI에게 시키는 게 맞다. 내 역할은 '무엇을 만들지' 결정하는 거지, 코드 한줄한줄 외우는 게 아니다. Claude Code를 커스텀해서 스킬 13개, 에이전트 4개를 만들어 쓴다. 도구를 다루는 게 아니라 도구에게 일을 시키는 쪽.",
-   x:18,y:70,color:"#c9a87c"},
-  {t:"분석은 헌신이다.", detail:"누군가를 깊이 분석하는 건 그 사람에게 가장 깊이 관심 갖는 방식이다. 이별 당한 날 삼겹살을 먹으면서 '사랑 마무리 분석 보고서'를 썼다. 남들은 무감정이라고 하지만, 나에게는 그게 감정을 처리하는 방식이다.",
-   x:70,y:74,color:"#a89080"},
-  {t:"편의를 요하는 게 아니라,\n더 불편하고 싶은 거야.", detail:"쉬운 길이 아니라 의미있는 길을 택한다. 편안함에서 성장이 오지 않는다고 믿는다. 스트레스와 불편함 속에서 자기가 누구인지 확인할 수 있다.",
-   x:28,y:28,color:"#d4a070"},
-  {t:"가시를 참아야 견디고 이겨내면서\n안아주러 가는 게 진짜 사랑이다.", detail:"사랑은 감정이 아니라 선택이다. 상대방의 가시에 찔리면서도 그 자리를 지키는 것. 도망가지 않고, 끝까지 안아주러 가는 것.",
-   x:66,y:30,color:"#c0907a"},
-  {t:"아부를 싫어한다.", detail:"명확하고 직접적인 소통. 칭찬은 근거가 있어야 하고, 비판은 정중할 수 있지만 모호하면 안 된다. AI에게도 아부 금지를 규칙으로 걸어놨다.",
-   x:42,y:80,color:"#b89888"},
-  {t:"노무사 시험도 준비 중", detail:"노동법은 사람과 제도의 접점이다. 해고, 임금, 착취 — 법이 개입하는 순간에 사람이 어떻게 변하는지가 흥미롭다. 창업이 더 끌리지만, 노무사 공부가 사람 읽는 눈을 키워준다. 관세사가 아니라 노무사인 이유는 노동이 사람과 더 직접 맞닿아 있어서.",
-   x:56,y:70,color:"#a88070"},
-  {t:"데이터에서 사람을 읽는다.", detail:"대화, 생체, 관계, 테스트 — 입력만 다르고 하려는 건 같다. 이 사람이 어떤 사람인지 구조화해서, 그걸로 더 나은 경험을 주는 것. 모든 프로젝트가 이 하나의 질문에서 출발한다.",
-   x:34,y:56,color:"#c8a090"},
-  {t:"👋 송명기 대표님", detail:"송명기 대표님, 반갑습니다!", x:52,y:52,color:"#e0c0a0",waving:true}
+  { tip:"데이터에서 사람을 읽는다",
+    q:"데이터에서 사람을 읽는다.",
+    detail:"대화·생체·관계·테스트 — 입력만 다르고 하려는 건 같다. 이 사람이 어떤 사람인지 구조화해서, 그걸로 더 나은 경험을 주는 것. 모든 프로젝트가 이 질문 하나에서 출발한다.",
+    tag:"주제",
+    hair:"parted", hairColor:"#2a1810", skin:"#f0c898", expression:"neutral", accent:"glasses", x:46, y:44 },
+
+  { tip:"분석은 헌신이다",
+    q:"분석은 헌신이다.",
+    detail:"누군가를 깊이 분석하는 건 그 사람에게 가장 깊이 관심 갖는 방식이다. 이별 당한 날 헬스 20분 뛰고 삼겹살 한 근 먹고 와서 '사랑 마무리 분석 보고서'를 썼다. 남들은 무감정이라고 부른다. 나는 감정을 이렇게 처리한다.",
+    tag:"태도",
+    hair:"messy", hairColor:"#3a2820", skin:"#e8b890", expression:"smirk", x:76, y:14 },
+
+  { tip:"비판을 무서워 않는 것만 우월",
+    q:"내가 우월하다고 생각하는 건 이 하나뿐이다.\n비판을 받아들이는 걸 무서워하지 않는 것.",
+    detail:"교수가 '넌 자신이 우월하다고 생각하지?'라고 물었다. 나는 답했다. '비판을 받는 게 무섭지 않고, 상처도 적게 받는다는 그 태도 하나만 우월하다고 생각합니다. 그게 발전에 유리하니까. 다른 건 전혀요.' 약함을 강함으로 재정의하는 것. 그게 가장 무너지지 않는 자리다.",
+    tag:"철학",
+    hair:"short", hairColor:"#1a1a1a", skin:"#e8a87c", expression:"line", x:8, y:16 },
+
+  { tip:"지옥을 같이 갈 수 있는 것",
+    q:"지옥을 같이 갈 수 있는 것.\n그게 진짜 가치다.",
+    detail:"편안한 관계가 아니라 서로의 가장 어두운 면을 알고도 남는 관계. 힘들 때 진짜가 드러난다고 믿는다. 그걸 견뎌주는 사람이 가치 있다.",
+    tag:"관계관",
+    hair:"long", hairColor:"#2a1810", skin:"#f0c896", expression:"smile", accent:"earring", x:82, y:46 },
+
+  { tip:"모의고사 1등급, 수능 3등급",
+    q:"능력이 아니라 상태가 문제였다.",
+    detail:"고등학교 3년, 국어 모의고사는 거의 1등급. 수능은 3등급. 재수 1등급, 수능 또 실패. 같은 사람이 같은 영역에서 1등급과 3등급을 오간다. 무언가가 '돌아올 때'만 작동하는 뇌라는 걸, 그때는 몰랐다.",
+    tag:"기억",
+    hair:"wave", hairColor:"#3a2010", skin:"#e8b090", expression:"line", x:14, y:48 },
+
+  { tip:"애인 무릎을 직접 일으켰다",
+    q:"무릎 꿇은 사람을 손으로 일으켜 세웠다.\n3일 뒤 이별 통보가 왔다.",
+    detail:"애인이 거짓말을 했다. 나는 화가 났다. 무릎을 꿇기에 내가 직접 손으로 일으켜 세웠다. 벌을 내리는 게 아니라 '의례의 종료'에 가까운 동작이었다. 3일 뒤 전화로 일방 이별 통보를 받았다. 권력의 위치에서 아래로 내려가는 데 정확히 72시간이 걸렸다.",
+    tag:"사건",
+    hair:"flat", hairColor:"#1a1a1a", skin:"#d8a078", expression:"oh", x:70, y:78 },
+
+  { tip:"논리로 사람을 필터링해왔다",
+    q:"논리로 사람을 필터링해왔다.",
+    detail:"감정보다 논리가 먼저 작동하는 구조다. 처음엔 '소시오패스인가' 의심했다. 분석해보니, 추상 사고가 감정 명명보다 빨라서 생긴 비대칭이었다. 감정이 없는 게 아니라, 이름 붙이는 속도가 느린 것. 찌르면서 '합당하다'고 느끼던 순간들이 있었다. 떠난 사람들은 틀려서가 아니라 아팠기 때문에 떠났다.",
+    tag:"자기이해",
+    hair:"parted", hairColor:"#1a1a1a", skin:"#e0a078", expression:"smirk", x:22, y:70 },
+
+  { tip:"버스 안 올 걸 알면서 기다렸다",
+    q:"버스가 안 올 걸 알지만\n기다리고 싶다.",
+    detail:"이별 나흘 전, 최악을 미리 가정해뒀다. '버스가 안 올 걸 알지만 정류장에 계속 서 있고 싶다'고 썼다. 그 다음 주에 버스가 안 왔다. 예상된 자기파괴 반응은 일어나지 않았다. 미리 알아두는 것으로 현재를 버티는 방식.",
+    tag:"에피소드",
+    hair:"bangs", hairColor:"#2a1810", skin:"#e8b890", expression:"line", accent:"mole", x:32, y:18 },
+
+  { tip:"성공과 실패는 명확히 구분",
+    q:"실패에 의미부여 하지 않는다.",
+    detail:"'실패도 경험이다' 같은 위로를 싫어한다. 실패는 실패로 끝나고, 다음 행동만이 의미를 만든다. 창업심사 또 떨어진 날에도 그랬다. 오히려 자극적이었다. 타격이 마취제처럼 작동하는 사람에게, 작은 승리는 오히려 무감각하다.",
+    tag:"태도",
+    hair:"short", hairColor:"#1a1a1a", skin:"#e8a87c", expression:"neutral", x:56, y:66 },
+
+  { tip:"게임 상위 0.1%, 본캐만",
+    q:"본캐는 상위 0.1%, 부캐는 건드리지 않는다.",
+    detail:"롤토체스 전국 상위 2000등, 대회 출전. 같은 장르의 부캐 게임은 티어를 아예 안 올린다. 능력의 문제가 아니라 '확신이 있는 영역'인지의 문제. 확신 없으면 도피, 확신 있으면 전력투구. 이 이분법이 인생 전반의 작동 방식이다.",
+    tag:"패턴",
+    hair:"cap", hairColor:"#2a4a7a", skin:"#d8a078", expression:"smile", x:88, y:24 },
+
+  { tip:"아부를 못 견딘다",
+    q:"AI에게도 아부 금지를 걸어놨다.",
+    detail:"명확하고 직접적인 소통. 칭찬은 근거가 있어야 하고, 비판은 정중할 수 있어도 모호해서는 안 된다. 그래서 AI 행동지침에도 '아부 금지권'을 명시해뒀다. 듣고 싶은 말이 아니라 맞는 말을 달라고.",
+    tag:"규칙",
+    hair:"horn", hairColor:"#4a2010", skin:"#e0a078", expression:"smirk", x:6, y:78 },
+
+  { tip:"불편하고 싶다",
+    q:"편의를 요하는 게 아니라\n더 불편하고 싶은 거야.",
+    detail:"앎이라는 고통을 받아들이고 싶다. 편안해지는 순간 죄책감이 작동해서 다시 불편한 쪽으로 돌아간다. 쉬운 길이 아니라 의미 있는 길. 10년 뒤에도 이 회로는 안 바뀔 걸 안다.",
+    tag:"원리",
+    hair:"ponytail", hairColor:"#2a1810", skin:"#f0c896", expression:"line", x:46, y:14 },
+
+  { tip:"가시를 참고 안아주는 게 사랑",
+    q:"가시를 참아내며 안아주러 가는 것,\n그게 진짜 사랑이다.",
+    detail:"사랑은 감정이 아니라 선택이다. 상대의 가시에 찔리면서도 자리를 지키는 것. 도망가지 않고 끝까지 안아주러 가는 것. 내가 그랬는지는 모르겠다. 그렇게 해야 한다고 믿는다.",
+    tag:"관계관",
+    hair:"halo", hairColor:"#e8c898", skin:"#f0c8a8", expression:"smile", x:66, y:30 },
+
+  { tip:"노무사인 이유",
+    q:"노무사는 사람을 읽는 렌즈다.",
+    detail:"창업이 더 끌리지만 노무사를 준비한다. 노동법은 사람과 제도의 접점이다. 해고·임금·착취 — 법이 개입하는 순간에 사람이 어떻게 변하는지가 흥미롭다. 관세사가 아니라 노무사인 이유는, 노동이 사람과 더 직접 맞닿아 있어서.",
+    tag:"진로",
+    hair:"flat", hairColor:"#1a1a1a", skin:"#e0a078", expression:"neutral", accent:"glasses", x:36, y:32 },
+
+  { tip:"식빵 나눔은 의무에 가까운 의식",
+    q:"그건 호의가 아니라\n의무에 가까운 의식이었다.",
+    detail:"평소 좋아하던 식빵을 사서 부모님께 나눴다. 그런데 내가 이걸 '호의'가 아니라 '의무에 가까운 의식'이라고 정확히 규정한다. 자기 행동의 내부 동기를 실시간으로 진단하는 사람. 정상인은 그냥 '드세요'라고 한다.",
+    tag:"관찰",
+    hair:"short", hairColor:"#2a1810", skin:"#e8b098", expression:"line", accent:"freckles", x:12, y:34 },
+
+  { tip:"👋 송명기 대표님",
+    q:"송명기 대표님, 반갑습니다!",
+    detail:"언젠가 이 사이트를 열어보신다면, 제가 인사드리는 중입니다. 👋",
+    tag:"인사",
+    hair:"short", hairColor:"#2a1810", skin:"#e8b090", expression:"smile", x:52, y:86, waving:true }
 ];
 
+// ===== 동물 = AI 도구/시스템 (호버 15자 이내) =====
 const ANIMALS = [
-  {type:"cat",t:"AI 커스텀 커맨드 13개",detail:"반복하는 작업을 명령어 하나로 자동화한 것. 예: 'anki-gen'이라고 치면 AI가 학습 카드를 만들고, 'research'라고 치면 3개 AI가 동시에 리서치를 시작한다. 일상의 반복을 줄이는 자동화 도구들.",
-   x:32,y:15,color:"#8b5cf6"},
-  {type:"dog",t:"AI 커스텀 스킬 9개",detail:"명령어가 아니라 대화형 워크플로우. '밤 회의'는 잠들기 전 텔레그램에 생각을 적으면 AI가 수집→분류→3자 토론→회의록까지 만들어준다. '실록'은 매일 한 일을 자동 기록한다. 복잡한 일과를 AI가 대신 정리해주는 시스템.",
-   x:62,y:12,color:"#6d8a5e"},
-  {type:"bird",t:"AI 에이전트 4개",detail:"스스로 판단해서 일하는 AI 비서. 창업 보조(CSO)는 프로젝트 현황을 파악하고 우선순위를 정리해주고, 건강 관리 에이전트는 수면·운동 패턴을 분석한다. 각자 전문 영역에서 자율적으로 동작한다.",
-   x:88,y:55,color:"#5a8ab5"},
-  {type:"owl",t:"3자 병렬 리서치",detail:"Claude, Gemini, Perplexity에 같은 질문을 동시에 던진다. 세 AI가 각자 다른 시각에서 답하면, 한 모델의 맹점이 드러난다. 하나의 의견만 듣는 것보다 세 관점을 비교하는 게 더 정확하다고 믿는다.",
-   x:5,y:66,color:"#8a6db5"},
-  {type:"fox",t:"교차 검증 시스템",detail:"한 AI의 답을 다른 AI가 검증하게 한다. AI도 틀릴 수 있다. 그래서 한 모델의 출력을 다른 모델이 '이거 맞아?'라고 확인하는 구조를 만들었다. 할루시네이션(AI의 거짓말)을 줄이는 방법.",
-   x:38,y:86,color:"#b58a5a"},
-  {type:"rabbit",t:"밤 회의",detail:"잠들기 전 텔레그램에 떠오르는 생각을 적는다. 그러면 AI가 수집해서 주제별로 분류하고, 세 AI가 토론한 뒤 회의록을 만들어놓는다. 아침에 일어나면 정리된 결론이 기다리고 있다. 밤의 잡념이 아침의 인사이트가 되는 시스템.",
-   x:74,y:86,color:"#5ab58a"},
-  {type:"bear",t:"3겹 안전망",detail:"AI와의 대화가 끊기지 않는 구조. 대화를 나누다 세션이 끝나도, 상태 파일이 항상 기록되고, 큰 전환이 있으면 브리지 문서가 남고, 전체 대화가 백업된다. 다음에 AI를 켜도 어디서 이어서 해야 하는지 알 수 있다.",
-   x:14,y:86,color:"#8a7a5a"},
-  {type:"fish",t:"이상규 실록",detail:"매일 한 일을 기록하는 일지. '그날 뭘 했지?'를 언제든 추적할 수 있다. AI 세션 ID와 매핑되어서, 어떤 작업을 어떤 AI와 했는지 전체 흐름이 보인다. 일종의 AI 협업 일지.",
-   x:88,y:26,color:"#5a8ab5"},
-  {type:"turtle",t:"CLI 자동화 도구",detail:"터미널에서 두 글자만 치면 AI 도구가 켜진다. 'cc' = Claude Code, 'gg' = Gemini, 'q' = 클립보드 내용을 리서치로 저장. 마우스 없이 키보드만으로 AI를 호출하는 단축키 모음.",
-   x:4,y:24,color:"#6d8a5e"}
+  { type:"cat", tip:"AI 커스텀 커맨드 13개",
+    title:"AI 커스텀 커맨드 13개",
+    detail:"반복 작업을 명령어 하나로 자동화한 것. 예: 'anki-gen'이라고 치면 AI가 학습 카드를 만들고, 'research'라고 치면 Claude·Gemini·Perplexity가 동시에 리서치를 시작한다. 일상의 반복을 줄이는 자동화 도구들.",
+    color:"#8b5cf6", x:28, y:8 },
+  { type:"dog", tip:"AI 커스텀 스킬 9개",
+    title:"AI 커스텀 스킬 9개",
+    detail:"명령어가 아니라 대화형 워크플로우. '밤 회의'는 자기 전 텔레그램에 생각을 적으면 AI가 수집→분류→3자 토론→회의록까지 만들어준다. '실록'은 매일 한 일을 자동 기록한다. 복잡한 일과를 AI가 정리하는 시스템.",
+    color:"#6d8a5e", x:64, y:6 },
+  { type:"bird", tip:"AI 에이전트 4개",
+    title:"AI 에이전트 4개",
+    detail:"스스로 판단하는 AI 비서. 창업 보조(CSO)는 프로젝트 우선순위를 정리하고, 건강 매니저는 수면·운동 패턴을 분석하고, 재무 매니저는 지출을 추적한다. 각자 전문 영역에서 자율적으로 동작한다.",
+    color:"#5a8ab5", x:90, y:58 },
+  { type:"owl", tip:"3자 병렬 리서치",
+    title:"3자 병렬 리서치",
+    detail:"Claude, Gemini, Perplexity에 같은 질문을 동시에 던진다. 한 모델의 맹점이 다른 두 모델에서 드러난다. 하나의 의견만 듣는 것보다 세 관점을 비교하는 게 정확하다.",
+    color:"#8a6db5", x:4, y:54 },
+  { type:"fox", tip:"교차 모델 검증",
+    title:"교차 모델 검증",
+    detail:"한 AI의 답을 다른 AI가 검증한다. AI도 틀린다. 그래서 한 모델의 출력을 다른 모델이 '이거 맞아?'라고 재검증하는 구조를 만들었다. 할루시네이션을 줄이는 가장 싼 방법이다.",
+    color:"#b58a5a", x:44, y:90 },
+  { type:"rabbit", tip:"밤 회의",
+    title:"밤 회의 시스템",
+    detail:"자기 전 텔레그램에 떠오르는 생각을 적는다. AI가 수집해서 주제별로 분류하고, 세 AI가 토론한 뒤 회의록을 만들어놓는다. 아침에 일어나면 정리된 결론이 기다린다. 밤의 잡념이 아침의 인사이트가 되는 시스템.",
+    color:"#5ab58a", x:76, y:92 },
+  { type:"bear", tip:"세션 3겹 안전망",
+    title:"세션 3겹 안전망",
+    detail:"AI와의 대화가 끊기지 않는 구조. 세션이 끝나도 상태 파일이 기록되고, 큰 전환이 있으면 브리지 문서가 남고, 전체 대화가 백업된다. 다음에 AI를 켜도 어디서 이어야 할지 안다.",
+    color:"#8a7a5a", x:12, y:92 },
+  { type:"fish", tip:"이상규 실록",
+    title:"이상규 실록",
+    detail:"매일 한 일을 기록하는 일지. 'AI 세션 ID'와 매핑되어서, 어떤 작업을 어떤 대화에서 했는지 전체 흐름이 보인다. 일종의 AI 협업 일지.",
+    color:"#5aa8d5", x:90, y:18 },
+  { type:"turtle", tip:"CLI 단축 (2글자)",
+    title:"CLI 단축키",
+    detail:"터미널에서 두 글자만 치면 AI 도구가 켜진다. 'cc' = Claude Code, 'gg' = Gemini, 'q' = 클립보드를 리서치로 저장. 마우스 없이 키보드만으로 AI를 호출한다.",
+    color:"#6d8a5e", x:2, y:18 }
 ];
 
+// ===== BRAIN (프로젝트 모달) =====
 const BRAIN = [
-  {n:"풀림",d:"AI 코칭 앱. 대화에서 사람의 패턴을 읽고 그에 맞춰 코칭. 지금은 서비스 중단 상태지만 핵심 아이디어는 살아있다.",b:"live",l:"https://pullim.vercel.app"},
-  {n:"인간30",d:"30명의 가상 인간을 만들어 같은 상황에 어떻게 다르게 반응하는지 관찰하는 도구. '사람은 왜 다르게 행동하는가'에 대한 탐구.",b:"wip"},
-  {n:"31번 캐릭터",d:"인간30의 관찰자. 30명을 지켜보면서 질문을 던지는 존재. 시뮬레이션 안에서 메타적 시점을 유지하는 역할.",b:"idea"},
-  {n:"AI 개인화 심리테스트",d:"184문항 심리측정(가치관/동기/애착/인지) → AI가 그 사람에게 맞춰 행동하는 방법까지 변환. 단순 테스트가 아니라 AI 개인화의 출발점.",b:"live",l:"https://lee3q.github.io/psych-test/"},
-  {n:"카톡 분석기",d:"카카오톡 대화를 넣으면 대화 패턴, 감정 흐름, 관계 역학을 분석해주는 도구.",b:"wip"},
-  {n:"BioLab",d:"심박수, 수면, 활동량 같은 생체 데이터에서 몸의 패턴을 읽는 도구.",b:"wip"},
-  {n:"인간관계망",d:"사람 사이의 관계를 선과 노드로 시각화. 누가 누구에게 어떤 영향을 주는지 한눈에 보는 아이디어.",b:"idea"},
-  {n:"자기분석 거울",d:"자신의 대화, 행동, 감정 데이터를 모아서 패턴을 보여주는 거울. '네가 모르는 너'를 보여주는 도구.",b:"idea"},
-  {n:"맥락별 AI 차등 적용",d:"같은 사람이라도 아침 출근길과 밤 불면에는 다른 대화가 필요하다. 상황에 따라 AI의 톤과 접근을 다르게 하는 아이디어.",b:"idea"},
-  {n:"관계 매핑",d:"A와 B의 관계, B와 C의 관계, 그 사이에서 A와 C의 관계가 어떻게 변하는지. 관계의 연쇄 반응을 매핑하는 아이디어.",b:"idea"}
+  {n:"풀림",d:"AI 코칭 앱. 대화에서 사람의 패턴을 읽고 그에 맞춰 코칭. 현재 서비스 중단, 재가동 검토.",b:"wip",l:"https://pullim.vercel.app"},
+  {n:"인간30",d:"LLM 기반 30인 행동 시뮬레이터. 4층 데이터 모델(몸/기억/정체성/세계관)과 28개 옵션표. 같은 자극에 30명이 다르게 반응한다.",b:"wip"},
+  {n:"31번 캐릭터",d:"인간30에 자기 자신을 31번째로 넣은 실험. 30명을 지켜보는 관찰자이자 메타 시점. 디지털 자아의 프로토타입.",b:"idea"},
+  {n:"AI 개인화 심리테스트",d:"184문항 4영역(가치관/동기/애착/인지) → AI 행동지침으로 자동 변환. 단순 테스트가 아니라 AI 개인화의 진입점.",b:"live",l:"https://lee3q.github.io/psych-test/"},
+  {n:"카톡 분석기",d:"카카오톡 대화를 넣으면 패턴·감정 흐름·관계 역학을 뽑아주는 도구.",b:"wip"},
+  {n:"BioLab",d:"심박·수면·활동 같은 생체 데이터에서 몸의 패턴을 읽는 도구.",b:"wip"},
+  {n:"인간관계망",d:"관계를 선과 노드로 시각화. 누가 누구에게 어떤 영향을 주는지 한눈에 보는 아이디어.",b:"idea"},
+  {n:"자기분석 거울",d:"대화·행동 데이터에서 무의식 패턴을 추출하는 거울. '네가 모르는 너'를 보여주는 도구.",b:"idea"},
+  {n:"맥락별 AI 차등 적용",d:"같은 사람이라도 아침과 새벽엔 다른 대화가 필요하다. 심리 프로파일 + 상황에 따라 AI 톤을 바꾸는 설계.",b:"idea"},
+  {n:"관계 매핑",d:"A–B, B–C 관계가 A–C 관계에 미치는 연쇄를 매핑. 관계의 N체 문제.",b:"idea"}
 ];
 
 const CONTACTS = [
-  {label:"Email",href:"mailto:andy53295774@gmail.com",x:20,y:5,color:"#ffd700"},
-  {label:"GitHub",href:"https://github.com/lee3Q",x:50,y:7,color:"#ffd700"},
-  {label:"LinkedIn",href:"https://linkedin.com/in/lee39/",x:80,y:4,color:"#ffd700"}
+  {label:"Email",href:"mailto:andy53295774@gmail.com",x:18,y:2,color:"#ffd700"},
+  {label:"GitHub",href:"https://github.com/lee3Q",x:50,y:2,color:"#ffd700"},
+  {label:"LinkedIn",href:"https://linkedin.com/in/lee39/",x:82,y:2,color:"#ffd700"}
 ];
 
+// ===== 해 모드 데이터 =====
 const SUN_PROJECTS = [
-  {n:"풀림",d:"AI 코칭/상담 앱. 대화에서 사람의 패턴을 읽고 맞춤 코칭. Next.js + Vercel 배포",l:"https://pullim.vercel.app"},
-  {n:"인간30",d:"30명 가상 인간 행동 시뮬레이터. 4층 데이터 모델(Body/Memory/Identity/World Map), 28개 옵션표",l:null},
-  {n:"AI 개인화 심리테스트",d:"184문항 심리측정 → AI 행동지침 변환. 가치관/동기/애착/인지스타일 4영역",l:"https://lee3q.github.io/psych-test/"},
-  {n:"카톡 분석기",d:"카카오톡 대화 데이터 패턴 분석 도구. Python + PWA",l:null},
-  {n:"수특 문제 생성기",d:"AI 파이프라인(Gemini→GPT→Claude)으로 수능특강 독서 42개 지문 126문항 자동 생성",l:null},
-  {n:"운동 PWA",d:"운동 기록 관리 프로그레시브 웹 앱",l:"https://lee3q.github.io/workout-log/"},
-  {n:"BioLab",d:"생체 데이터 분석 도구",l:null}
+  {n:"풀림",d:"AI 코칭·상담 앱. 대화 패턴을 읽고 맞춤 코칭. Next.js + Vercel",l:"https://pullim.vercel.app",m:"Next.js / GPT-4 / Vercel"},
+  {n:"인간30",d:"30인 가상 행동 시뮬레이터. 4층 데이터 모델(Body/Memory/Identity/Worldmap), 28개 옵션표, stdlib-only Python 엔진",l:null,m:"Python / Claude Code"},
+  {n:"AI 개인화 심리테스트",d:"184문항 심리측정(가치관·동기·애착·인지) → AI 행동지침 자동 변환",l:"https://lee3q.github.io/psych-test/",m:"HTML / JS / GitHub Pages"},
+  {n:"카톡 분석기",d:"카카오톡 대화 데이터 패턴·감정·관계 역학 분석",l:null,m:"Python / PWA"},
+  {n:"BioLab",d:"심박·수면·활동 생체 데이터에서 몸의 패턴을 읽는 도구",l:null,m:"WIP"}
+];
+
+const SUN_TOOLS = [
+  {n:"수특 문제 생성기",d:"AI 파이프라인(Gemini → GPT → Claude)으로 수능특강 독서 42지문 126문항 자동 생성",l:null,m:"AI Pipeline"},
+  {n:"운동 PWA",d:"운동 기록 관리 프로그레시브 웹앱. 단백질 자동 계산, 주간 분할 추적",l:"https://lee3q.github.io/workout-log/",m:"PWA"}
+];
+
+const SUN_WORKFLOW = [
+  {n:"3자 병렬 리서치",d:"Claude + Gemini + Perplexity 동시 호출로 한 모델의 맹점을 상쇄"},
+  {n:"교차 모델 검증",d:"한 AI의 답을 다른 AI가 검증. 할루시네이션 최소화"},
+  {n:"판례 영구 보존",d:"의사결정 기록은 수정하지 않음. 당시 상태와 논리를 원본 보존"},
+  {n:"세션 3겹 안전망",d:"state / handoff / transcript 백업으로 AI 대화 맥락 완전 복원"},
+  {n:"밤 회의",d:"텔레그램 → 자동 수집 → 주제 분류 → 3자 AI 토론 → 아침에 회의록 자동 생성"},
+  {n:"CLI 단축 자동화",d:"2글자 단축키(cc/gg/q)로 AI 도구 호출. 마우스 없는 워크플로우"}
 ];
 
 const SUN_SKILLS = [
-  "Claude Code 커스텀 스킬 13개","에이전트 4개 운영","3자 병렬 리서치",
-  "교차 모델 검증","밤 회의 (텔레그램 연동)","세션 관리 시스템",
-  "CLI 자동화 (cc/gg/ww/q/pp)","AI 파이프라인 설계","프롬프트 엔지니어링",
-  "Next.js","Python","PWA"
+  "Claude Code 커스텀 설계","AI 파이프라인 오케스트레이션","프롬프트 엔지니어링",
+  "심리측정 도구 설계","행동 데이터 분석","Python (stdlib)",
+  "Next.js / React","PWA","GitHub Pages 배포",
+  "노동법 (공인노무사 준비)","기업경영"
 ];
 
 // ===== BUILD MOON SCENE =====
 const moonEl = document.getElementById('moon');
-const anims = ['f1','f2','f3','f4'];
+const anims = ['f1','f2','f3','f4','f5'];
 
-// Brain (free wandering)
+// Brain (center, free wandering)
 const brainEl = document.createElement('div');
 brainEl.className = 'brain';
-brainEl.style.cssText = `left:42%;top:38%;width:clamp(100px,20vw,170px);
-  animation:brainWander 28s ease-in-out infinite`;
+brainEl.style.cssText = `left:44%;top:40%;width:clamp(110px,22vw,180px);
+  animation:brainWander 32s ease-in-out infinite`;
 brainEl.innerHTML = brainSVG;
 brainEl.onclick = () => showModal(brainHTML());
 brainEl.setAttribute('role','button');
-brainEl.setAttribute('aria-label','내 아이디어와 만든 것들');
+brainEl.setAttribute('aria-label','이상규의 뇌 — 프로젝트와 아이디어');
 moonEl.appendChild(brainEl);
 
 // People
-PEOPLE.forEach((p,i) => {
+PEOPLE.forEach((p, i) => {
   const el = document.createElement('div');
   el.className = 'obj person';
-  const sz = p.waving ? 'clamp(36px,7vw,56px)' : 'clamp(34px,6.5vw,54px)';
+  const sz = p.waving ? 'clamp(56px,10vw,80px)' : 'clamp(52px,9vw,74px)';
+  const dur = 22 + (i % 5) * 4;
+  const delay = (i * 1.7) % 8;
   el.style.cssText = `left:${p.x}%;top:${p.y}%;width:${sz};
-    animation:${anims[i%4]} ${16+i*2.8}s ${i*1.4}s ease-in-out infinite`;
-  el.innerHTML = personSVG(p.color);
+    animation:${anims[i%5]} ${dur}s ${delay}s ease-in-out infinite`;
+  el.innerHTML = faceSVG(p) + `<div class="tip">${p.tip}</div>`;
   el.onclick = () => showModal(personHTML(p));
   el.setAttribute('role','button');
-  el.setAttribute('aria-label',p.t.replace(/\n/g,' '));
+  el.setAttribute('aria-label', p.tip);
   moonEl.appendChild(el);
 });
 
 // Animals
-ANIMALS.forEach((a,i) => {
+ANIMALS.forEach((a, i) => {
   const el = document.createElement('div');
   el.className = 'obj animal';
-  const sz = a.type==='fish' ? 'clamp(38px,7.5vw,58px)' : 'clamp(32px,6vw,48px)';
+  const sz = a.type==='fish'||a.type==='turtle' ? 'clamp(56px,10vw,74px)' : 'clamp(48px,8.5vw,66px)';
+  const dur = 20 + (i % 4) * 3;
   el.style.cssText = `left:${a.x}%;top:${a.y}%;width:${sz};
-    animation:${anims[i%4]} ${14+i*2.5}s ${i*1.1}s ease-in-out infinite`;
-  el.innerHTML = animalSVG(a.type, a.color);
+    animation:${anims[i%5]} ${dur}s ${(i*1.3)%7}s ease-in-out infinite`;
+  el.innerHTML = animalFace(a.type, a.color) + `<div class="tip">${a.tip}</div>`;
   el.onclick = () => showModal(animalHTML(a));
   el.setAttribute('role','button');
-  el.setAttribute('aria-label',a.t);
+  el.setAttribute('aria-label', a.tip);
   moonEl.appendChild(el);
 });
 
 // Contacts (star-people at top)
-CONTACTS.forEach((c,i) => {
+CONTACTS.forEach((c, i) => {
   const el = document.createElement('div');
   el.className = 'obj contact';
-  el.style.cssText = `left:${c.x}%;top:${c.y}%;width:clamp(28px,5vw,40px);
-    animation:${anims[i%4]} 22s ${i*2}s ease-in-out infinite`;
+  el.style.cssText = `left:${c.x}%;top:${c.y}%;width:clamp(32px,5.5vw,44px);
+    animation:${anims[i%5]} 24s ${i*2}s ease-in-out infinite`;
   el.innerHTML = `<svg viewBox="0 0 40 40" fill="none" stroke="${c.color}" stroke-width="1.5">
-    <path d="M20 2l4.5 13H38l-11 8 4.5 13L20 28 8.5 36 13 23 2 15h13.5z" fill="rgba(255,215,0,.15)"/>
-    <g class="eyes"><circle cx="17" cy="16" r="2.5" stroke="${c.color}"/><circle cx="23" cy="16" r="2.5" stroke="${c.color}"/>
-    <circle class="pupil" data-cx="17" data-cy="16" cx="17" cy="16" r="1.2" fill="#111"/>
-    <circle class="pupil" data-cx="23" data-cy="16" cx="23" cy="16" r="1.2" fill="#111"/></g></svg>`;
+    <path d="M20 2l4.5 13H38l-11 8 4.5 13L20 28 8.5 36 13 23 2 15h13.5z" fill="rgba(255,215,0,.18)"/>
+    <g class="eyes-closed">
+      <path d="M13 17q3 1 6 0" stroke="#ffd700" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+      <path d="M21 17q3 1 6 0" stroke="#ffd700" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+    </g>
+    <g class="eyes-open">
+      <circle cx="16" cy="17" r="2.5" fill="#fff"/><circle cx="24" cy="17" r="2.5" fill="#fff"/>
+      <circle class="pupil" data-cx="16" data-cy="17" cx="16" cy="17" r="1.3" fill="#111"/>
+      <circle class="pupil" data-cx="24" data-cy="17" cx="24" cy="17" r="1.3" fill="#111"/>
+      <circle class="highlight" cx="16.5" cy="16.5" r=".5" fill="#fff"/>
+      <circle class="highlight" cx="24.5" cy="16.5" r=".5" fill="#fff"/>
+    </g></svg>
+    <div class="tip">${c.label}</div>`;
   el.onclick = () => window.open(c.href, '_blank');
   el.setAttribute('role','link');
-  el.setAttribute('aria-label',c.label);
+  el.setAttribute('aria-label', c.label);
   moonEl.appendChild(el);
 });
 
 // ===== BUILD SUN MODE =====
-const sunPG = document.getElementById('sun-projects');
-SUN_PROJECTS.forEach(p => {
-  const c = document.createElement('div');
-  c.className = 'scard';
-  c.innerHTML = `<h3>${p.n}</h3><p>${p.d}</p>${p.l ? `<a href="${p.l}" target="_blank">${p.l.replace('https://','')}</a>` : ''}`;
-  sunPG.appendChild(c);
-});
+function buildCards(data, containerId, linkable=true) {
+  const c = document.getElementById(containerId);
+  data.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'scard';
+    card.innerHTML = `<h3>${p.n}</h3><p>${p.d}</p>${
+      linkable && p.l ? `<a href="${p.l}" target="_blank" rel="noopener">${p.l.replace('https://','')}</a>` : ''
+    }${p.m ? `<span class="meta">${p.m}</span>` : ''}`;
+    c.appendChild(card);
+  });
+}
+buildCards(SUN_PROJECTS, 'sun-projects');
+buildCards(SUN_TOOLS, 'sun-tools');
+buildCards(SUN_WORKFLOW, 'sun-workflow', false);
+
 const sunSK = document.getElementById('sun-skills');
 SUN_SKILLS.forEach(s => {
   const t = document.createElement('span');
@@ -546,33 +915,31 @@ SUN_SKILLS.forEach(s => {
   sunSK.appendChild(t);
 });
 
-// ===== MODAL HTML GENERATORS =====
+// ===== MODAL HTML =====
 function brainHTML() {
   const cards = BRAIN.map(p => `
     <div class="pcard">
       <h3>${p.n}</h3>
       <p>${p.d}</p>
       <span class="badge ${p.b}">${p.b.toUpperCase()}</span>
-      ${p.l ? `<a href="${p.l}" target="_blank">열기 →</a>` : ''}
+      ${p.l ? `<a href="${p.l}" target="_blank" rel="noopener">열기 →</a>` : ''}
     </div>`).join('');
-  return `<h2>내 아이디어와 만든 것들</h2><div class="pgrid">${cards}</div>`;
+  return `<h2>내 뇌 속 — 만든 것과 아이디어</h2><div class="pgrid">${cards}</div>`;
 }
-
 function personHTML(p) {
-  const txt = p.t.replace(/\n/g, '<br>');
-  return `<div class="qtext">"${txt}"</div>${p.detail ? `<div class="detail">${p.detail}</div>` : ''}`;
+  const q = (p.q || p.tip).replace(/\n/g, '<br>');
+  return `${p.tag ? `<span class="tag">${p.tag}</span>` : ''}
+    <div class="qtext">${q}</div>
+    ${p.detail ? `<div class="detail">${p.detail}</div>` : ''}`;
 }
-
 function animalHTML(a) {
-  const items = a.detail ? `<p>${a.detail}</p>` : '';
-  return `<h2>${a.t}</h2>${items}`;
+  return `<h2>${a.title}</h2>${a.detail ? `<p>${a.detail}</p>` : ''}`;
 }
 
 // ===== MODAL =====
 const modal = document.getElementById('modal');
 const mbody = document.getElementById('mbody');
 let hintHidden = false;
-
 function showModal(html) {
   mbody.innerHTML = html;
   modal.classList.add('on');
@@ -584,15 +951,10 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') hideModal();
 // ===== MODE TOGGLE (default = sun) =====
 let isSun = true;
 const sunEl = document.getElementById('sun');
-const toggleBtn = document.getElementById('toggle');
-
 function toggle() {
   isSun = !isSun;
   document.body.classList.toggle('moon', !isSun);
-  moonEl.classList.toggle('off', isSun);
-  if (isSun) sunEl.style.display = '';
-  else sunEl.style.display = 'none';
-  // Update icon
+  sunEl.style.display = isSun ? '' : 'none';
   const icon = document.getElementById('toggleIcon');
   if (isSun) {
     icon.innerHTML = `<circle cx="20" cy="20" r="9" fill="#f59e0b" stroke="#d97706" stroke-width="1.5"/>
@@ -603,58 +965,65 @@ function toggle() {
         <line x1="32" y1="8" x2="29" y2="11"/><line x1="11" y1="29" x2="8" y2="32"/>
       </g>`;
   } else {
-    icon.innerHTML = `<path d="M20 4A16 16 0 1 0 36 20A12 12 0 0 1 20 4Z" fill="#e8e8f0" stroke="#aaa" stroke-width="1.5"/>`;
+    icon.innerHTML = `<path d="M24 4A16 16 0 1 0 36 22A13 13 0 0 1 24 4Z" fill="#e8e8f0" stroke="#aaa" stroke-width="1.5"/>
+      <circle cx="14" cy="28" r=".8" fill="#aaa"/><circle cx="30" cy="32" r=".6" fill="#aaa"/>`;
   }
 }
 
 // ===== "가만히 있어" =====
 let isFrozen = false;
 const allObjects = () => document.querySelectorAll('#moon .obj, #moon .brain');
-
 function toggleStill() {
   isFrozen = !isFrozen;
-  document.getElementById('stillBtn').classList.toggle('on', isFrozen);
-  document.getElementById('stillBtn').textContent = isFrozen ? '... 움직여' : '가만히 있어';
-
-  allObjects().forEach(el => {
-    el.classList.toggle('frozen', isFrozen);
-  });
+  const btn = document.getElementById('stillBtn');
+  btn.classList.toggle('on', isFrozen);
+  btn.textContent = isFrozen ? '... 움직여' : '가만히 있어';
+  allObjects().forEach(el => el.classList.toggle('frozen', isFrozen));
 }
 
 // ===== PUPIL TRACKING =====
-let mouseX = innerWidth / 2, mouseY = innerHeight / 2;
+let mouseX = innerWidth/2, mouseY = innerHeight/2;
 document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
 document.addEventListener('touchmove', e => {
-  const t = e.touches[0];
-  if (t) { mouseX = t.clientX; mouseY = t.clientY; }
-}, {passive: true});
+  const t = e.touches[0]; if (t) { mouseX = t.clientX; mouseY = t.clientY; }
+}, {passive:true});
 
 function updatePupils() {
-  document.querySelectorAll('.frozen .pupil').forEach(p => {
+  // Frozen 상태에선 커서 추적 (크게 이동)
+  document.querySelectorAll('.frozen .pupil, .frozen .highlight').forEach(p => {
     const svg = p.closest('svg');
     if (!svg) return;
     const rect = svg.getBoundingClientRect();
-    const cx = parseFloat(p.dataset.cx);
-    const cy = parseFloat(p.dataset.cy);
+    const vb = svg.viewBox.baseVal;
+    const cx = parseFloat(p.dataset.cx || p.getAttribute('cx'));
+    const cy = parseFloat(p.dataset.cy || p.getAttribute('cy'));
+    if (!p.dataset.cx && !p._init) { p._origCx = parseFloat(p.getAttribute('cx')); p._origCy = parseFloat(p.getAttribute('cy')); p._init=true; }
     if (isNaN(cx) || isNaN(cy)) return;
-    // Scale pupil center to screen coords
-    const viewBox = svg.viewBox.baseVal;
-    const scaleX = rect.width / viewBox.width;
-    const scaleY = rect.height / viewBox.height;
-    const pupilScreenX = rect.left + cx * scaleX;
-    const pupilScreenY = rect.top + cy * scaleY;
-    const dx = mouseX - pupilScreenX;
-    const dy = mouseY - pupilScreenY;
+    const sx = rect.width / vb.width, sy = rect.height / vb.height;
+    const sX = rect.left + cx * sx, sY = rect.top + cy * sy;
+    const dx = mouseX - sX, dy = mouseY - sY;
     const dist = Math.sqrt(dx*dx + dy*dy);
-    const maxMove = 2.2;
-    const moveX = dist > 0 ? (dx / dist) * maxMove : 0;
-    const moveY = dist > 0 ? (dy / dist) * maxMove : 0;
-    p.setAttribute('cx', cx + moveX);
-    p.setAttribute('cy', cy + moveY);
+    const max = p.classList.contains('highlight') ? 1.5 : 4;
+    const mvx = dist > 0 ? (dx/dist) * max : 0;
+    const mvy = dist > 0 ? (dy/dist) * max : 0;
+    p.setAttribute('cx', cx + mvx);
+    p.setAttribute('cy', cy + mvy);
   });
   requestAnimationFrame(updatePupils);
 }
 updatePupils();
+
+// ===== BLINKING =====
+function blink() {
+  const targets = document.querySelectorAll('#moon .obj, #moon .brain');
+  const t = targets[Math.floor(Math.random() * targets.length)];
+  if (t && !isFrozen) {
+    t.classList.add('blinking');
+    setTimeout(() => t.classList.remove('blinking'), 140);
+  }
+  setTimeout(blink, 900 + Math.random() * 1800);
+}
+setTimeout(blink, 2000);
 
 // ===== PARTICLE CANVAS =====
 const canvas = document.getElementById('particles');
@@ -664,14 +1033,15 @@ function resize() { W = canvas.width = innerWidth; H = canvas.height = innerHeig
 resize();
 window.addEventListener('resize', resize);
 
-const dots = Array.from({length: 180}, () => ({
+const dots = Array.from({length: 200}, () => ({
   x: Math.random() * innerWidth,
   y: Math.random() * innerHeight,
-  r: Math.random() * 1.2 + 0.3,
-  dx: (Math.random() - 0.5) * 0.15,
-  dy: -(Math.random() * 0.1 + 0.02),
-  o: Math.random() * 0.5 + 0.2,
-  phase: Math.random() * Math.PI * 2
+  r: Math.random() * 1.4 + 0.3,
+  dx: (Math.random() - 0.5) * 0.18,
+  dy: -(Math.random() * 0.12 + 0.02),
+  o: Math.random() * 0.55 + 0.2,
+  phase: Math.random() * Math.PI * 2,
+  hue: 160 + Math.random() * 60
 }));
 
 function drawParticles() {
@@ -686,25 +1056,61 @@ function drawParticles() {
     const flicker = 0.5 + 0.5 * Math.sin(t * 1.5 + d.phase);
     ctx.beginPath();
     ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(200,210,255,${d.o * flicker})`;
+    ctx.fillStyle = `hsla(${d.hue},70%,80%,${d.o * flicker})`;
     ctx.fill();
   });
   requestAnimationFrame(drawParticles);
 }
 drawParticles();
 
-// ===== PARALLAX (moon mode only) =====
+// ===== PARALLAX (moon only) =====
 function doParallax(cx, cy) {
   if (isSun) return;
-  const mx = (cx / W - 0.5) * 8;
-  const my = (cy / H - 0.5) * 8;
+  const mx = (cx / W - 0.5) * 10;
+  const my = (cy / H - 0.5) * 10;
   moonEl.style.transform = `translate(${mx}px, ${my}px)`;
 }
 document.addEventListener('mousemove', e => doParallax(e.clientX, e.clientY));
 document.addEventListener('touchmove', e => {
-  const t = e.touches[0];
-  if (t) doParallax(t.clientX, t.clientY);
-}, {passive: true});
+  const t = e.touches[0]; if (t) doParallax(t.clientX, t.clientY);
+}, {passive:true});
+
+// ===== SCROLL REVEAL (sun mode) =====
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, {threshold: 0.12});
+document.querySelectorAll('.scard').forEach(el => io.observe(el));
+
+// ===== MOBILE: 첫 탭 = tip, 두 번째 탭 = 모달 =====
+(function(){
+  const isTouch = 'ontouchstart' in window;
+  if (!isTouch) return;
+  let armed = null, timer = null;
+  document.querySelectorAll('.obj').forEach(el => {
+    // onclick 기본 동작(모달) 제거 → 직접 제어
+    const handler = el.onclick;
+    el.onclick = null;
+    el.addEventListener('touchend', e => {
+      if (armed === el) {
+        clearTimeout(timer);
+        armed = null;
+        handler && handler.call(el, e);
+      } else {
+        e.preventDefault();
+        armed = el;
+        const tip = el.querySelector('.tip');
+        if (tip) { tip.style.opacity = '1'; tip.style.transform = 'translate(-50%,-100%) translateY(-4px)'; }
+        el.style.filter = 'brightness(1.2) saturate(1.15)';
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          armed = null;
+          el.style.filter = '';
+          if (tip) { tip.style.opacity = ''; tip.style.transform = ''; }
+        }, 2000);
+      }
+    }, {passive:false});
+  });
+})();
 </script>
 </body>
 </html>
