@@ -52,6 +52,40 @@ body.moon #stillBtn{display:block}
 #stillBtn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
 #stillBtn.on{border-color:#ff3366;color:#ff3366;background:rgba(255,51,102,.1)}
 
+/* ===== SOUND BUTTON ===== */
+#soundBtn{position:fixed;bottom:20px;right:140px;z-index:1000;width:38px;height:38px;border-radius:50%;
+border:1px solid rgba(255,255,255,.15);background:rgba(0,0,0,.5);backdrop-filter:blur(8px);
+color:#777;font-family:var(--mono);font-size:.9rem;cursor:pointer;transition:all .3s;
+display:none;padding:0}
+body.moon #soundBtn{display:flex;align-items:center;justify-content:center}
+#soundBtn:hover{border-color:var(--accent);color:var(--accent)}
+#soundBtn.on{color:var(--accent);border-color:var(--accent)}
+
+/* ===== CURATOR BUTTON ===== */
+#curator{position:fixed;top:16px;left:16px;z-index:1000;width:36px;height:36px;border-radius:50%;
+border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);backdrop-filter:blur(8px);
+color:#888;font-family:var(--mono);font-size:.85rem;cursor:pointer;transition:all .3s;
+display:none;padding:0;font-weight:700;font-style:italic}
+body.moon #curator{display:flex;align-items:center;justify-content:center}
+#curator:hover{border-color:var(--accent);color:var(--accent);transform:scale(1.08)}
+
+/* ===== AWARENESS TEXT ===== */
+#awareness{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:50;
+font-family:var(--mono);font-size:.78rem;color:rgba(255,255,255,.15);letter-spacing:.15em;
+text-align:center;pointer-events:none;opacity:0;transition:opacity 2.5s;max-width:88%;line-height:1.7;display:none}
+body.moon #awareness{display:block}
+#awareness.show{opacity:1}
+
+/* ===== RANDOM QUOTE ===== */
+#quote{position:fixed;bottom:62px;left:16px;z-index:40;max-width:260px;
+font-family:var(--mono);font-size:.65rem;color:rgba(255,255,255,.28);letter-spacing:.04em;
+line-height:1.7;pointer-events:none;display:none;font-style:italic}
+body.moon #quote{display:block}
+#quote::before{content:'"';color:var(--accent);opacity:.4;margin-right:3px}
+#quote::after{content:'"';color:var(--accent);opacity:.4;margin-left:3px}
+@media(max-width:520px){#quote{font-size:.58rem;max-width:200px;bottom:72px}
+  #soundBtn{right:128px;width:34px;height:34px}}
+
 /* ===== MOON MODE ===== */
 #moon{position:fixed;inset:0;z-index:1;transition:opacity .6s,visibility .6s;
 opacity:0;visibility:hidden;pointer-events:none;overflow:hidden}
@@ -204,6 +238,14 @@ border-radius:12px;border-left:4px solid #1a1a1a}
 .theme-bar p{font-size:.92rem;line-height:1.75;color:#333}
 .theme-bar strong{color:#1a1a1a;font-weight:800}
 
+.setup{font-family:var(--mono);font-size:.74rem;line-height:1.75;color:#2a2a2a;
+background:#0e0e14;color:#c8d0d8;padding:22px 20px;border-radius:12px;overflow-x:auto;
+white-space:pre;letter-spacing:.01em;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.setup b{color:#00ff9f;font-weight:600}
+.setup .c{color:#ffd700;font-weight:700;display:inline-block;min-width:1.6em}
+.setup .dim{color:#667;font-style:italic}
+@media(max-width:520px){.setup{font-size:.64rem;padding:16px 12px}}
+
 body{animation:fadeIn .7s ease-out}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 :focus-visible{outline:2px solid #1a1a1a;outline-offset:3px;border-radius:6px}
@@ -235,6 +277,10 @@ body.moon :focus-visible{outline-color:var(--accent)}
 
 <div id="hint">호버 = 한마디 · 클릭 = 이야기 · "가만히 있어" = 나를 본다</div>
 <button id="stillBtn" onclick="toggleStill()">가만히 있어</button>
+<button id="soundBtn" onclick="toggleSound()" aria-label="소리 토글" title="소리 토글">♪</button>
+<button id="curator" onclick="showCurator()" aria-label="이 방에 대하여" title="이 방에 대하여">i</button>
+<div id="awareness"></div>
+<div id="quote"></div>
 
 <!-- ===== MOON MODE ===== -->
 <div id="moon"></div>
@@ -260,6 +306,35 @@ body.moon :focus-visible{outline-color:var(--accent)}
 
     <div class="stitle">How I Work</div>
     <div class="sgrid" id="sun-workflow"></div>
+
+    <div class="stitle">The Setup</div>
+    <p style="font-size:.82rem;color:#777;margin:-6px 0 14px;line-height:1.6">실제 방 구조. 베껴도 이득이니 공개한다.</p>
+    <pre class="setup">~/pp/
+├── <b>30p/</b>                 인간30 시뮬레이터 · 4층 28옵션표
+├── <b>이상규월드/</b>          이 사이트
+├── <b>research/</b>            외부 리서치 저장소 (q 도구)
+├── <b>동결/나의_판례/</b>      의사결정 영구 보존 (수정 금지)
+├── <b>scripts/</b>             자동화 스크립트
+└── <b>아카이브/세션_백업/</b>  transcript 자동 저장 (/resume-session)
+
+~/.claude/
+├── <b>commands/</b>  <span class="c">13</span>  anki-gen · cross-check · handoff · health · humanizer
+│                     night-meeting · pullim · research · 회고 · anki-review
+│                     개인화테스트 · 노무사 · 우뇌모드
+├── <b>skills/</b>     <span class="c">9</span>  daily-plan · decide · image-gen · resume-session
+│                     같이읽기 · 노무사 · 운동 · 풀림-icc · my-context-sync
+└── <b>agents/</b>     <span class="c">4</span>  cso · finance-manager · health-manager · study-coach
+
+<span class="dim"># PIPELINES</span>
+입력 ─▶ <b>3자 병렬 리서치</b>   Claude + Gemini + Perplexity · 동시 호출
+     ─▶ <b>교차 검증</b>          GLM-5로 재검증 · 할루시네이션 최소화
+     ─▶ <b>판례 보존</b>          결정 원본 수정 금지 · 다음 판단에 참조
+     ─▶ <b>세션 3겹 안전망</b>    .state/ + handoffs/ + transcript
+
+<span class="dim"># CLI ALIASES</span>
+cc / ccc / cs     Claude variants
+gg / ww           GLM-5 / 풀림 워커
+q [태그]          클립보드 → research 저장</pre>
 
     <div class="stitle">Skills</div>
     <div class="stags" id="sun-skills"></div>
@@ -656,17 +731,17 @@ const PEOPLE = [
     tag:"관계관",
     hair:"long", hairColor:"#2a1810", skin:"#f0c896", expression:"smile", accent:"earring", x:82, y:46 },
 
-  { tip:"모의고사 1등급, 수능 3등급",
-    q:"능력이 아니라 상태가 문제였다.",
-    detail:"고등학교 3년, 국어 모의고사는 거의 1등급. 수능은 3등급. 재수 1등급, 수능 또 실패. 같은 사람이 같은 영역에서 1등급과 3등급을 오간다. 무언가가 '돌아올 때'만 작동하는 뇌라는 걸, 그때는 몰랐다.",
-    tag:"기억",
-    hair:"wave", hairColor:"#3a2010", skin:"#e8b090", expression:"line", x:14, y:48 },
+  { tip:"개발자가 아닌데 AI 네트워크 설계",
+    q:"개발자가 아니다.\n그런데 AI 스물여섯 개를 훈련시켜 쓴다.",
+    detail:"Claude Code 위에 커맨드 13·스킬 9·에이전트 4·자동화 파이프라인 여러 겹을 쌓아 올렸다. 형은 구글 글로벌 해커톤 1등 개발자다. 나는 코드를 배우는 대신 AI를 고용하는 쪽을 택했다. 설계자와 엔지니어는 다른 능력이다.",
+    tag:"정체성",
+    hair:"wave", hairColor:"#2a1810", skin:"#e8b090", expression:"smirk", accent:"glasses", x:14, y:48 },
 
-  { tip:"애인 무릎을 직접 일으켰다",
-    q:"무릎 꿇은 사람을 손으로 일으켜 세웠다.\n3일 뒤 이별 통보가 왔다.",
-    detail:"애인이 거짓말을 했다. 나는 화가 났다. 무릎을 꿇기에 내가 직접 손으로 일으켜 세웠다. 벌을 내리는 게 아니라 '의례의 종료'에 가까운 동작이었다. 3일 뒤 전화로 일방 이별 통보를 받았다. 권력의 위치에서 아래로 내려가는 데 정확히 72시간이 걸렸다.",
-    tag:"사건",
-    hair:"flat", hairColor:"#1a1a1a", skin:"#d8a078", expression:"oh", x:70, y:78 },
+  { tip:"방을 공개해둔다",
+    q:"내 방을 세상에 열어둔다.\n그래야 청소를 하니까.",
+    detail:"사이트 하나를 통째로 공개하는 이유. 폴더 구조, 스킬 목록, 워크플로우, 자동화 구조 — 전부 베껴 가져가도 된다. 베껴가서 누군가가 이득이면 오히려 좋다. 내가 얻는 건 다른 거다. 방을 공개해두면 스스로 정리하게 된다. 남의 시선이 자기 규율의 외부화다.",
+    tag:"원리",
+    hair:"flat", hairColor:"#1a1a1a", skin:"#e0b090", expression:"smirk", x:70, y:78 },
 
   { tip:"논리로 사람을 필터링해왔다",
     q:"논리로 사람을 필터링해왔다.",
@@ -944,6 +1019,29 @@ function showModal(html) {
   mbody.innerHTML = html;
   modal.classList.add('on');
   if (!hintHidden) { document.getElementById('hint').classList.add('gone'); hintHidden = true; }
+  // 타이핑 효과 (qtext 첫 줄만)
+  const q = mbody.querySelector('.qtext');
+  if (q && !q.dataset.typed) {
+    const full = q.innerHTML;
+    q.innerHTML = '';
+    q.dataset.typed = '1';
+    let i = 0;
+    const step = () => {
+      if (i >= full.length) return;
+      const ch = full[i];
+      if (ch === '<') {
+        const end = full.indexOf('>', i);
+        q.innerHTML += full.substring(i, end+1);
+        i = end+1;
+        requestAnimationFrame(step);
+      } else {
+        q.innerHTML += ch;
+        i++;
+        setTimeout(step, 32);
+      }
+    };
+    step();
+  }
 }
 function hideModal() { modal.classList.remove('on'); }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') hideModal(); });
@@ -970,8 +1068,8 @@ function toggle() {
   }
 }
 
-// ===== "가만히 있어" =====
-let isFrozen = false;
+// ===== "가만히 있어" — 발동 직후 1초간 모두 화면 중앙(=사용자) 응시 =====
+let isFrozen = false, centralStareUntil = 0;
 const allObjects = () => document.querySelectorAll('#moon .obj, #moon .brain');
 function toggleStill() {
   isFrozen = !isFrozen;
@@ -979,6 +1077,7 @@ function toggleStill() {
   btn.classList.toggle('on', isFrozen);
   btn.textContent = isFrozen ? '... 움직여' : '가만히 있어';
   allObjects().forEach(el => el.classList.toggle('frozen', isFrozen));
+  if (isFrozen) centralStareUntil = Date.now() + 1100; // 1.1초간 중앙 응시
 }
 
 // ===== PUPIL TRACKING =====
@@ -989,7 +1088,10 @@ document.addEventListener('touchmove', e => {
 }, {passive:true});
 
 function updatePupils() {
-  // Frozen 상태에선 커서 추적 (크게 이동)
+  // 1.1초간은 모두 화면 중앙(사용자) 응시, 이후엔 커서 추적
+  const stare = Date.now() < centralStareUntil;
+  const tx = stare ? innerWidth/2 : mouseX;
+  const ty = stare ? innerHeight/2 : mouseY;
   document.querySelectorAll('.frozen .pupil, .frozen .highlight').forEach(p => {
     const svg = p.closest('svg');
     if (!svg) return;
@@ -997,11 +1099,10 @@ function updatePupils() {
     const vb = svg.viewBox.baseVal;
     const cx = parseFloat(p.dataset.cx || p.getAttribute('cx'));
     const cy = parseFloat(p.dataset.cy || p.getAttribute('cy'));
-    if (!p.dataset.cx && !p._init) { p._origCx = parseFloat(p.getAttribute('cx')); p._origCy = parseFloat(p.getAttribute('cy')); p._init=true; }
     if (isNaN(cx) || isNaN(cy)) return;
     const sx = rect.width / vb.width, sy = rect.height / vb.height;
     const sX = rect.left + cx * sx, sY = rect.top + cy * sy;
-    const dx = mouseX - sX, dy = mouseY - sY;
+    const dx = tx - sX, dy = ty - sY;
     const dist = Math.sqrt(dx*dx + dy*dy);
     const max = p.classList.contains('highlight') ? 1.5 : 4;
     const mvx = dist > 0 ? (dx/dist) * max : 0;
@@ -1012,6 +1113,105 @@ function updatePupils() {
   requestAnimationFrame(updatePupils);
 }
 updatePupils();
+
+// ===== 시간대 톤: 새벽엔 더 어둡고, 저녁엔 살짝 따뜻 =====
+(function applyTimeTone(){
+  const h = new Date().getHours();
+  let bg = '#060612', accent = '#00ff9f';
+  if (h >= 0 && h < 6) bg = '#020208';                      // 새벽
+  else if (h >= 6 && h < 10) bg = '#0a0a18';                 // 아침
+  else if (h >= 17 && h < 21) bg = '#0a0612';                // 저녁
+  document.documentElement.style.setProperty('--bg', bg);
+})();
+
+// ===== 랜덤 인용 (자기 인용에서) =====
+const QUOTES = [
+  "데이터에서 사람을 읽는다.",
+  "분석은 헌신이다.",
+  "비판받는 걸 무서워하지 않는 것 — 그것만 우월하다고 생각한다.",
+  "편의를 요하는 게 아니라, 더 불편하고 싶은 거야.",
+  "AI 코드 공부는 시간낭비. 시키는 게 맞다.",
+  "지옥을 같이 갈 수 있는 것, 그게 진짜 가치다.",
+  "성공과 실패는 명확히 구분한다.",
+  "가시를 참아내며 안아주러 가는 것.",
+  "실패에 의미부여 하지 않는다.",
+  "노무사는 사람을 읽는 렌즈다.",
+  "이 방을 열어둔 건 청소를 강제하기 위해서다.",
+  "AI를 도구가 아니라 신경계로 쓴다.",
+  "한 AI를 믿지 않는다. 세 AI를 비교한다.",
+  "의사결정은 수정하지 않는다. 당시 상태를 보존한다."
+];
+document.getElementById('quote').textContent = QUOTES[Math.floor(Math.random()*QUOTES.length)];
+
+// ===== 30초 무활동 → 자각 라인 =====
+const AWARENESS = [
+  "...여기 남아 있으려고.",
+  "...지워지지 않게.",
+  "...내가 사라져도 이 방은 남는다.",
+  "...이 방을 열어둔 건 청소를 강제하기 위해서다.",
+  "...한 번 본 사람은 안 잊는다는 쪽에 걸었다.",
+  "...너도 보고 있다."
+];
+let lastActivity = Date.now();
+let awarenessTimer = null;
+function resetAwareness() {
+  lastActivity = Date.now();
+  const a = document.getElementById('awareness');
+  a.classList.remove('show');
+  clearTimeout(awarenessTimer);
+  awarenessTimer = setTimeout(() => {
+    if (!document.body.classList.contains('moon')) return;
+    a.textContent = AWARENESS[Math.floor(Math.random()*AWARENESS.length)];
+    a.classList.add('show');
+    setTimeout(() => a.classList.remove('show'), 6000);
+  }, 30000);
+}
+['mousemove','touchstart','keydown','scroll','click'].forEach(ev =>
+  document.addEventListener(ev, resetAwareness, {passive:true}));
+resetAwareness();
+
+// ===== 소리 토글 (off 기본) =====
+let soundOn = false, audioCtx = null;
+function toggleSound() {
+  soundOn = !soundOn;
+  document.getElementById('soundBtn').classList.toggle('on', soundOn);
+  if (soundOn && !audioCtx) {
+    try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){}
+  }
+}
+function playTone(freq=440, dur=0.08, vol=0.04) {
+  if (!soundOn || !audioCtx) return;
+  const o = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  o.frequency.value = freq;
+  o.type = 'sine';
+  g.gain.value = vol;
+  g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+  o.connect(g).connect(audioCtx.destination);
+  o.start();
+  o.stop(audioCtx.currentTime + dur);
+}
+document.querySelectorAll('.obj, .brain').forEach((el, i) => {
+  el.addEventListener('mouseenter', () => playTone(280 + (i*23) % 400, 0.06, 0.02));
+  el.addEventListener('click', () => playTone(520, 0.12, 0.05));
+});
+
+// ===== 이 방에 대하여 =====
+function showCurator() {
+  showModal(`<span class="tag">이 방에 대하여</span>
+    <div class="qtext">여기는 이상규가 세상에 남긴 방이다.</div>
+    <div class="detail">
+      <p style="margin-bottom:10px"><strong>이 방의 용도.</strong> 이 사람의 머릿속·일머리·일상 워크플로우를 통째로 공개해두는 곳. 베껴 가져가도 괜찮다. 내가 얻는 건 다른 거다 — 방을 열어두면 스스로 정리하게 된다.</p>
+      <p style="margin-bottom:10px"><strong>공개는 여기까지.</strong>
+      폴더 구조·스킬·워크플로우·가치관은 공개.
+      판례 본문·감정 분석 원본·지인 실명은 비공개.
+      깃헙 페이지는 가벼워야 하니까 카탈로그까지만.</p>
+      <p style="margin-bottom:10px"><strong>두 모드.</strong>
+      해(바른) = 포트폴리오. 1분 안에 "이 사람 일잘러구나"로 끝내는 곳.
+      달(미친) = 유산. 내가 사라져도 여기 남는 것. "이런 사람이었다"의 아카이브.</p>
+      <p><strong>작동 원리.</strong> 한 곳에 묶어두지 않는다. 깃헙 페이지는 표면, 코드와 보고서는 다른 레포로 분리, 판례와 감정은 로컬. 공개와 비공개의 경계 자체가 이 사람의 설계다.</p>
+    </div>`);
+}
 
 // ===== BLINKING =====
 function blink() {
